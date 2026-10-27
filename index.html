@@ -169,7 +169,7 @@
         <p class="product-for">Para profesionistas independientes: agentes de seguros, vendedores independientes, asesores inmobiliarios, contadores, consultores, nutriólogos y más; y para negocios de 1 a 10 personas. Si sabes usar tu computadora y WhatsApp, puedes usarlo.</p>
         <div class="cta">
           <a class="btn btn-primary" href="#contacto" data-plan="Mi Primer Agente">Quiero Mi Primer Agente</a>
-          <a class="btn btn-ghost" href="https://wa.me/52XXXXXXXXXX?text=Hola%2C%20me%20interesa%20Mi%20Primer%20Agente" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+          <a class="btn btn-ghost" href="mailto:contacto.axycs@gmail.com?subject=Me%20interesa%20Mi%20Primer%20Agente">Preguntar por correo</a>
         </div>
         <p class="product-honest">Si en el diagnóstico vemos que no lo necesitas, te recomendamos una opción más simple. No te vendemos de más.</p>
       </div>
@@ -508,8 +508,9 @@
       <span class="eyebrow">Contacto</span>
       <h2>Platiquemos de tu negocio.</h2>
       <p class="lead">Cuéntanos qué te quita más tiempo o qué cifras te gustaría tener claras.</p>
-      <!-- TODO: reemplazar 52XXXXXXXXXX por el número real (también en el botón flotante) -->
-      <p><a class="btn btn-primary" href="https://wa.me/52XXXXXXXXXX?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20con%20Axycs" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>
+      <!-- Cuando haya número de WhatsApp: agregar botón https://wa.me/52NUMERO -->
+      <p><a class="btn btn-primary" href="mailto:contacto.axycs@gmail.com?subject=Quiero%20un%20diagn%C3%B3stico%20con%20Axycs">Escríbenos por correo</a></p>
+      <p class="mail-line"><a href="mailto:contacto.axycs@gmail.com">contacto.axycs@gmail.com</a></p>
       <p class="next-title">¿Qué pasa después?</p>
       <ol class="next">
         <li>Te contactamos en uno o dos días hábiles.</li>
@@ -518,8 +519,12 @@
         <li>Recibes una propuesta precisa, con precio cerrado.</li>
       </ol>
     </div>
-    <!-- TODO: reemplazar TU_ID por el ID de Formspree (https://formspree.io) para recibir los mensajes por correo -->
-    <form class="reveal" action="https://formspree.io/f/TU_ID" method="POST">
+    <!-- FormSubmit reenvía el formulario a contacto.axycs@gmail.com (el primer envío pide confirmar por correo) -->
+    <form class="reveal" action="https://formsubmit.co/contacto.axycs@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Nuevo contacto desde axycs">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://diegosreco.github.io/axycs/?enviado=1#contacto">
       <p class="form-title">O déjanos tus datos</p>
       <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" required autocomplete="name"></div>
       <div><label for="email">Correo</label><input id="email" name="email" type="email" required autocomplete="email"></div>
@@ -539,9 +544,10 @@
       <div><label for="msg">¿Qué tareas te quitan más tiempo? <span class="opt">(opcional)</span></label><textarea id="msg" name="mensaje" rows="3" placeholder="Ej. Hacer cotizaciones, dar seguimiento a clientes, cerrar el mes."></textarea></div>
       <input type="hidden" id="plan" name="interes" value="Diagnóstico">
       <p class="plan-chosen" id="plan-chosen" hidden>Paquete de interés: <strong></strong></p>
-      <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn btn-primary" type="submit">Solicitar diagnóstico</button>
       <p class="form-note">Usaremos tus datos únicamente para responderte.</p>
+      <p class="form-ok" id="form-ok" hidden>¡Gracias! Recibimos tu mensaje y te contactaremos en uno o dos días hábiles.</p>
     </form>
   </div>
 </section>
@@ -554,7 +560,7 @@
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/52XXXXXXXXXX?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20con%20Axycs" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+<a class="wa-float" href="#contacto" aria-label="Contáctanos">
   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
 </a>
 

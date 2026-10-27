@@ -26,6 +26,11 @@
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  // Confirmación tras enviar el formulario (FormSubmit regresa con ?enviado=1)
+  if (/[?&]enviado=1/.test(location.search)) {
+    document.getElementById("form-ok").hidden = false;
+  }
+
   // Animación de aparición al hacer scroll
   var items = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {

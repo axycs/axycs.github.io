@@ -335,3 +335,7 @@ footer a { color: var(--aqua); text-decoration: none; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .btn:hover, .card:hover, .wa-float:hover { transform: none; }
 }
+
+.mail-line a { color: var(--aqua); font-weight: 600; text-decoration: none; }
+.mail-line a:hover { text-decoration: underline; }
+.form-ok { margin: 0; padding: 12px 14px; border-radius: 10px; background: rgba(60, 198, 200, .18); color: var(--white); font-weight: 600; }
