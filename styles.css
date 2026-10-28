@@ -565,3 +565,11 @@ footer a { color: var(--aqua); text-decoration: none; }
 }
 .sk-hint { display: none; font-size: .78rem; color: var(--muted); margin: 0 0 6px; }
 @media (max-width: 760px) { .sk-hint { display: block; } }
+
+/* Estudio: KPIs compactos (~40% del alto anterior) */
+.study-stats { margin-top: 28px; gap: 12px; }
+.study-stats .stat { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; row-gap: 0; align-items: center; padding: 10px 16px; }
+.study-stats .front-num { display: none; }
+.study-stats .stat-num { grid-row: span 2; font-size: clamp(1.5rem, 2.4vw, 1.8rem); margin: 0; }
+.study-stats .stat h4 { font-size: .74rem; margin: 0; align-self: end; }
+.study-stats .stat p { font-size: .74rem; line-height: 1.3; margin: 0; align-self: start; }
