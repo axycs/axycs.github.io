@@ -325,22 +325,53 @@
         <h3>¿Qué tan automatizable es tu profesión?</h3>
         <p>Cruzamos el catálogo de ocupaciones de México (SINCO) con la probabilidad de automatización de Frey y Osborne. Lo automatizable no es tu profesión: son tareas. Justo las que te quitamos de encima.</p>
       </div>
-      <div class="auto-stats">
-        <div class="stat stat-hot"><strong>1 de cada 2</strong><span>ocupaciones en México tiene más del 50% de probabilidad de automatización</span></div>
-        <div class="stat tile"><strong>10 de 36</strong><span>profesiones por cuenta propia superan el 50%</span></div>
-        <div class="stat tile"><strong>95%</strong><span>contadores y auditores, la más alta del grupo</span></div>
+      <div class="auto-stats tiles">
+        <article class="front stat">
+          <svg class="front-art sm" viewBox="0 0 200 100" aria-hidden="true">
+            <circle cx="66" cy="36" r="12"/><path d="M42 86c0-14 10-24 24-24s24 10 24 24"/>
+            <path d="M100 16v74" stroke-dasharray="4 5"/>
+            <circle cx="134" cy="36" r="12"/><path d="M110 86c0-14 10-24 24-24s24 10 24 24"/>
+            <path d="M166 12l-9 13h8l-3 11 10-14h-8z"/>
+          </svg>
+          <span class="front-num">01</span>
+          <strong class="stat-num">1 de cada 2</strong>
+          <h4>Ocupaciones en México</h4>
+          <p>tiene más del 50% de probabilidad de automatización (222 de 426).</p>
+        </article>
+        <article class="front stat">
+          <svg class="front-art sm" viewBox="0 0 200 100" aria-hidden="true"><circle cx="22" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="36" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="50" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="64" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="78" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="92" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="106" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="120" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="134" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="148" cy="34" r="4.5" fill="#0b4a5a"/><circle cx="162" cy="34" r="4.5"/><circle cx="176" cy="34" r="4.5"/><circle cx="22" cy="52" r="4.5"/><circle cx="36" cy="52" r="4.5"/><circle cx="50" cy="52" r="4.5"/><circle cx="64" cy="52" r="4.5"/><circle cx="78" cy="52" r="4.5"/><circle cx="92" cy="52" r="4.5"/><circle cx="106" cy="52" r="4.5"/><circle cx="120" cy="52" r="4.5"/><circle cx="134" cy="52" r="4.5"/><circle cx="148" cy="52" r="4.5"/><circle cx="162" cy="52" r="4.5"/><circle cx="176" cy="52" r="4.5"/><circle cx="22" cy="70" r="4.5"/><circle cx="36" cy="70" r="4.5"/><circle cx="50" cy="70" r="4.5"/><circle cx="64" cy="70" r="4.5"/><circle cx="78" cy="70" r="4.5"/><circle cx="92" cy="70" r="4.5"/><circle cx="106" cy="70" r="4.5"/><circle cx="120" cy="70" r="4.5"/><circle cx="134" cy="70" r="4.5"/><circle cx="148" cy="70" r="4.5"/><circle cx="162" cy="70" r="4.5"/><circle cx="176" cy="70" r="4.5"/></svg>
+          <span class="front-num">02</span>
+          <strong class="stat-num">10 de 36</strong>
+          <h4>Profesiones por cuenta propia</h4>
+          <p>superan el 50%. Cada punto es una profesión.</p>
+        </article>
+        <article class="front stat">
+          <svg class="front-art sm" viewBox="0 0 200 100" aria-hidden="true">
+            <path d="M40 86A60 60 0 0 1 160 86"/><path d="M56 86A44 44 0 0 1 144 86" stroke-dasharray="3 5"/>
+            <path d="M100 86L154 77"/><circle cx="100" cy="86" r="4"/>
+            <path d="M34 86h12M154 86h12M100 20v10"/>
+          </svg>
+          <span class="front-num">03</span>
+          <strong class="stat-num">95%</strong>
+          <h4>Contadores y auditores</h4>
+          <p>la profesión por cuenta propia más automatizable.</p>
+        </article>
       </div>
-      <div class="auto-grid">
-        <figure class="auto-card tile">
+      <div class="auto-grid tiles">
+        <figure class="auto-card front">
           <figcaption>
-            <strong>Top 10 · profesiones por cuenta propia</strong>
-            <span>Probabilidad de automatización de sus tareas</span>
+            <span class="front-num">04</span>
+            <h4>Top 10 · por cuenta propia</h4>
+            <p class="front-claim">Probabilidad de automatización de sus tareas.</p>
           </figcaption>
           <ol class="bars" id="auto-top"></ol>
           <div class="bar-row bar-axis" aria-hidden="true"><span></span><span class="bars-axis"><span>0%</span><span>50%</span><span>100%</span></span><span></span></div>
+          <a class="front-link" href="#contacto">Agenda tu diagnóstico <span aria-hidden="true">↗</span></a>
         </figure>
-        <div class="auto-card tile">
-          <label for="auto-q" class="auto-label">Busca tu profesión</label>
+        <div class="auto-card front">
+          <span class="front-num">05</span>
+          <h4><label for="auto-q">Busca tu profesión</label></h4>
+          <p class="front-claim">Escribe tu ocupación y mira dónde cae.</p>
           <div class="auto-search">
             <input id="auto-q" type="search" placeholder="Ej. nutriólogo, abogado, contador" autocomplete="off"
                    role="combobox" aria-expanded="false" aria-controls="auto-list" aria-autocomplete="list">
@@ -354,6 +385,7 @@
             <div class="auto-hist" id="auto-hist" role="img" aria-label="Distribución de la probabilidad de automatización de las ocupaciones"></div>
             <div class="bars-axis" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
           </div>
+          <a class="front-link" href="#ia">Ver cómo lo automatizamos <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <p class="auto-note">Mide qué tan susceptibles son las tareas de una ocupación a la tecnología evaluada por Frey y Osborne (2017); no predice pérdida de empleos ni considera costos, salarios o adopción. Los valores vienen de ocupaciones de EE. UU. (O*NET) emparejadas con el SINCO por similitud de texto. "Por cuenta propia": profesionistas, técnicos, agentes y servicios personales que suelen trabajar de forma independiente (selección de Axycs).</p>
