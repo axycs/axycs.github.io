@@ -18,9 +18,9 @@
   function pct(p) { return p > 0 && p < 0.005 ? "&lt;1%" : Math.round(p * 100) + "%"; }
   function norm(s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
   function level(p) {
-    if (p >= 0.7) return ["Alta", "Muchas de sus tareas son repetitivas. Automatizarlas libera horas cada semana."];
-    if (p >= 0.3) return ["Media", "Una parte de sus tareas se puede automatizar; el resto requiere tu criterio."];
-    return ["Baja", "Su núcleo es difícil de automatizar. Lo administrativo alrededor (agenda, cobros, reportes) sí se puede."];
+    if (p >= 0.7) return ["Alta", "Muchas de sus tareas son repetitivas: captura, seguimiento, cobros y reportes. Automatizarlas libera horas cada semana."];
+    if (p >= 0.3) return ["Media", "Parte de sus tareas requiere tu criterio. La parte administrativa y contable sí se puede automatizar."];
+    return ["Baja", "El núcleo de tu trabajo es difícil de automatizar, pero la parte administrativa y contable (agenda, cobros, facturas, reportes) sí. De eso nos encargamos."];
   }
 
   // Tooltip compartido
