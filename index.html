@@ -349,6 +349,43 @@
       </article>
     </div>
 
+    <!-- Estudio: probabilidad de automatización por ocupación -->
+    <div class="auto-study reveal" id="automatizacion">
+      <div class="auto-head">
+        <span class="eyebrow">Estudio Axycs · 490 ocupaciones del INEGI</span>
+        <h3>¿Qué tan automatizable es tu profesión?</h3>
+        <p>Cruzamos el catálogo de ocupaciones de México (SINCO, INEGI) con la probabilidad de automatización de Frey y Osborne. Lo automatizable no es tu profesión completa: son tareas. Y son justo las que podemos quitarte de encima.</p>
+      </div>
+      <div class="auto-grid">
+        <figure class="auto-card tile">
+          <figcaption>
+            <strong>Top 10 · profesiones por cuenta propia</strong>
+            <span>Probabilidad de automatización de sus tareas</span>
+          </figcaption>
+          <ol class="bars" id="auto-top"></ol>
+          <div class="bar-row bar-axis" aria-hidden="true"><span></span><span class="bars-axis"><span>0%</span><span>50%</span><span>100%</span></span><span></span></div>
+        </figure>
+        <div class="auto-card tile">
+          <label for="auto-q" class="auto-label">Busca tu profesión</label>
+          <div class="auto-search">
+            <input id="auto-q" type="search" placeholder="Ej. nutriólogo, abogado, contador" autocomplete="off"
+                   role="combobox" aria-expanded="false" aria-controls="auto-list" aria-autocomplete="list">
+            <ul id="auto-list" class="auto-list" role="listbox" hidden></ul>
+          </div>
+          <div class="auto-result" id="auto-result" aria-live="polite">
+            <p class="auto-empty">Escribe al menos 3 letras.</p>
+          </div>
+          <div class="auto-hist-wrap">
+            <p class="auto-hist-title">Dónde cae frente a las 426 ocupaciones con dato</p>
+            <div class="auto-hist" id="auto-hist" role="img" aria-label="Distribución de la probabilidad de automatización de las ocupaciones"></div>
+            <div class="bars-axis" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="auto-note">Mide qué tan susceptibles son las tareas de una ocupación a la tecnología evaluada por Frey y Osborne (2017); no predice pérdida de empleos ni considera costos, salarios o adopción. Los valores vienen de ocupaciones de EE. UU. (O*NET) emparejadas con el SINCO por similitud de texto. "Por cuenta propia": profesionistas, técnicos, agentes y servicios personales que suelen trabajar de forma independiente (selección de Axycs).</p>
+      <div class="auto-tip" id="auto-tip" role="tooltip" hidden></div>
+    </div>
+
     <h3 class="sectors-title reveal">También trabajamos con</h3>
     <div class="grid g4 sectors tiles">
       <article class="card sector tile reveal">
@@ -595,6 +632,8 @@
   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5z"/></svg>
 </a>
 
+<script src="data/automatizacion.js" defer></script>
+<script src="auto.js" defer></script>
 <script src="script.js"></script>
 </body>
 </html>
