@@ -24,6 +24,29 @@
     });
   });
 
+  // Problemas: el visitante marca los que le pasan y se envían con el formulario
+  var pains = document.querySelectorAll(".pain");
+  var painMsg = document.getElementById("pain-msg");
+  var painCta = document.getElementById("pain-cta");
+  var dolores = document.getElementById("dolores");
+  pains.forEach(function (b) {
+    b.addEventListener("click", function () {
+      b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+      var on = document.querySelectorAll('.pain[aria-pressed="true"]');
+      var names = [], fixes = [];
+      on.forEach(function (p) {
+        names.push(p.querySelector("strong").textContent);
+        var f = p.getAttribute("data-fix");
+        if (fixes.indexOf(f) < 0) fixes.push(f);
+      });
+      dolores.value = names.join("; ");
+      painCta.hidden = on.length === 0;
+      painMsg.innerHTML = on.length === 0
+        ? "Toca los que te pasen."
+        : "Marcaste " + on.length + " de " + pains.length + ". Lo resolvemos con <strong>" + fixes.join(" + ") + "</strong>.";
+    });
+  });
+
   document.getElementById("year").textContent = new Date().getFullYear();
 
   // Confirmación tras enviar el formulario (FormSubmit regresa con ?enviado=1)

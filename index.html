@@ -13,7 +13,7 @@
   <link rel="icon" href="logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add("js");</script>
 </head>
@@ -31,9 +31,9 @@
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <ul id="menu">
+      <li><a class="link" href="#servicios">Servicios</a></li>
       <li><a class="link link-hot" href="#ia">Soluciones IA</a></li>
       <li><a class="link" href="#industrias">Para quién</a></li>
-      <li><a class="link" href="#servicios">Servicios</a></li>
       <li><a class="link" href="#impacto">Impacto</a></li>
       <li><a class="link" href="#paquetes">Paquetes</a></li>
       <li><a class="link" href="#faq">Preguntas</a></li>
@@ -120,25 +120,125 @@
 
 <!-- PROBLEMAS -->
 <section class="alt problem" id="problemas">
-  <div class="wrap">
+  <div class="wrap pain-layout">
     <div class="section-head reveal">
       <span class="eyebrow">¿Te suena familiar?</span>
       <h2>Mucho trabajo, poca claridad.</h2>
-      <p class="lead">Los despachos y consultorios crecen más rápido que su manera de organizarse. Estos son los problemas que resolvemos.</p>
+      <p class="lead">Marca lo que te pasa y te decimos con qué lo resolvemos.</p>
     </div>
-    <div class="grid g3">
-      <div class="card reveal"><h3>Todo se hace a mano</h3><p>Capturar facturas, perseguir pagos, armar reportes y mandar recordatorios consume horas que podrías dedicar a tus clientes.</p></div>
-      <div class="card reveal"><h3>Papeles por todos lados</h3><p>Facturas, contratos, escrituras y expedientes en papel o en el celular de alguien. Encontrar uno es una búsqueda del tesoro.</p></div>
-      <div class="card reveal"><h3>Se me pasan las fechas</h3><p>Vencimientos fiscales, plazos legales, citas y renovaciones dependen de la memoria o de una agenda.</p></div>
-      <div class="card reveal"><h3>No sé qué me deja cada cliente</h3><p>Honorarios, gastos y horas repartidos en Excel y apps. Cerrar el mes toma días y aun así hay dudas.</p></div>
-      <div class="card reveal"><h3>Mis sistemas no se hablan</h3><p>Clientes, facturación, banco y contabilidad viven separados. Los mismos datos se capturan tres veces.</p></div>
-      <div class="card reveal"><h3>Dependo de una sola persona</h3><p>Si quien "sabe cómo funciona todo" falta, el trabajo se detiene.</p></div>
+    <div class="pain-box reveal">
+      <div class="pains" role="group" aria-label="Problemas frecuentes">
+        <button type="button" class="pain" aria-pressed="false" data-fix="Automatización">
+          <span class="pain-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg></span>
+          <span class="pain-txt"><strong>Todo se hace a mano</strong><span>Facturas, cobranza y reportes, una y otra vez.</span></span>
+          <span class="tick" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="pain" aria-pressed="false" data-fix="Gobernanza de datos">
+          <span class="pain-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+          <span class="pain-txt"><strong>Papeles por todos lados</strong><span>Encontrar un contrato o expediente toma horas.</span></span>
+          <span class="tick" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="pain" aria-pressed="false" data-fix="Automatización">
+          <span class="pain-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 13v4M12 19h.01"/></svg></span>
+          <span class="pain-txt"><strong>Se me pasan las fechas</strong><span>Vencimientos, plazos y renovaciones viven en la memoria.</span></span>
+          <span class="tick" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="pain" aria-pressed="false" data-fix="Data Analytics">
+          <span class="pain-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 2-2.5 2-2.5 4M12 17h.01"/></svg></span>
+          <span class="pain-txt"><strong>No sé qué me deja cada cliente</strong><span>Cerrar el mes toma días y aun así hay dudas.</span></span>
+          <span class="tick" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="pain" aria-pressed="false" data-fix="Gobernanza de datos">
+          <span class="pain-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 017 7h2M15 7h2a5 5 0 011.5 9.8M8 12h3M3 3l18 18"/></svg></span>
+          <span class="pain-txt"><strong>Mis sistemas no se hablan</strong><span>El mismo dato se captura tres veces.</span></span>
+          <span class="tick" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="pain" aria-pressed="false" data-fix="Equipos data-driven">
+          <span class="pain-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M3 21c0-3.3 2.7-6 6-6s6 2.7 6 6M19 8v4M19 16h.01"/></svg></span>
+          <span class="pain-txt"><strong>Dependo de una sola persona</strong><span>Si quien sabe cómo funciona falta, todo se detiene.</span></span>
+          <span class="tick" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="pain-result" aria-live="polite">
+        <p id="pain-msg">Toca los que te pasen.</p>
+        <a class="btn btn-primary btn-sm" href="#contacto" id="pain-cta" hidden>Resolverlo en el diagnóstico</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Qué hacemos</span>
+      <h2>Cuatro frentes, un objetivo: que tus datos trabajen para ti.</h2>
+      <p class="lead">Cada proyecto combina los frentes que tu negocio necesita. Nada de plantillas.</p>
+    </div>
+    <div class="fronts">
+      <article class="front f-gob reveal" id="gobernanza">
+        <svg class="front-art" viewBox="0 0 200 150" aria-hidden="true">
+          <path d="M100 14l50 17v38c0 33-23 53-50 63-27-10-50-30-50-63V31z"/>
+          <path d="M100 30l36 12v28c0 24-16 39-36 47"/>
+          <ellipse cx="100" cy="58" rx="22" ry="7"/>
+          <path d="M78 58v32c0 3.9 9.8 7 22 7s22-3.1 22-7V58M78 74c0 3.9 9.8 7 22 7s22-3.1 22-7"/>
+          <path d="M14 40h22M14 52h14M164 98h22M172 110h14"/>
+        </svg>
+        <span class="front-num">01</span>
+        <h3>Gobernanza de datos</h3>
+        <p class="front-claim">Información ordenada, confiable y segura.</p>
+        <ul><li>Fuentes y calidad de tus datos</li><li>Una sola versión de cada cifra</li><li>Accesos, respaldos y datos personales</li></ul>
+        <a class="front-link" href="#paquetes">Ver paquetes <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="front f-auto reveal" id="automatizacion">
+        <svg class="front-art" viewBox="0 0 200 150" aria-hidden="true">
+          <path d="M52 75A48 48 0 0 1 134 41"/><path d="M136 27l-1 15-15-1"/>
+          <path d="M148 75A48 48 0 0 1 66 109"/><path d="M64 123l1-15 15 1"/>
+          <circle cx="100" cy="75" r="26"/>
+          <path d="M104 57l-14 21h11l-4 17 15-23h-11z"/>
+          <path d="M14 40h20M14 52h12M166 110h20M174 122h12"/>
+        </svg>
+        <span class="front-num">02</span>
+        <h3>Automatización</h3>
+        <p class="front-claim">Menos trabajo manual, menos errores.</p>
+        <ul><li>Lectura de facturas y documentos</li><li>Conciliación, cobranza y recordatorios</li><li>Asistentes de IA para lo repetitivo</li></ul>
+        <a class="front-link" href="#ia">Ver soluciones con IA <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="front f-team reveal" id="equipos">
+        <svg class="front-art" viewBox="0 0 200 150" aria-hidden="true">
+          <path d="M30 84l40-22 40 14 50-44"/><path d="M146 30h16v16"/>
+          <circle cx="70" cy="62" r="4"/><circle cx="110" cy="76" r="4"/>
+          <circle cx="60" cy="110" r="10"/><path d="M42 140c0-10 8-18 18-18s18 8 18 18"/>
+          <circle cx="100" cy="104" r="12"/><path d="M78 140c0-12 10-22 22-22s22 10 22 22"/>
+          <circle cx="140" cy="110" r="10"/><path d="M122 140c0-10 8-18 18-18s18 8 18 18"/>
+        </svg>
+        <span class="front-num">03</span>
+        <h3>Equipos data-driven</h3>
+        <p class="front-claim">Un equipo que decide con datos.</p>
+        <ul><li>Indicadores y rutinas semanales</li><li>Capacitación con tus propios datos</li><li>Acompañamiento hasta tu autonomía</li></ul>
+        <a class="front-link" href="#proceso">Ver cómo trabajamos <span aria-hidden="true">↗</span></a>
+      </article>
+      <article class="front f-data reveal" id="analytics">
+        <svg class="front-art" viewBox="0 0 200 150" aria-hidden="true">
+          <path d="M24 16v118h160"/>
+          <path d="M44 134v-24M64 134v-34M84 134v-28"/>
+          <path d="M104 22v112" stroke-dasharray="4 5"/>
+          <path d="M30 96l24-6 24 4 26-10 26-24 26-18 24-20"/>
+          <path d="M104 84l26-4 26-4 24-4" stroke-dasharray="6 5"/>
+          <path d="M150 104l4-10 4 10 10 4-10 4-4 10-4-10-10-4z"/>
+        </svg>
+        <span class="front-num">04</span>
+        <h3>Data Analytics e IA</h3>
+        <p class="front-claim">Cifras claras y decisiones medibles.</p>
+        <ul><li>Tableros y alertas de tus indicadores</li><li>Pronósticos de flujo y demanda</li><li>Efecto real de tus decisiones (Causal AI)</li></ul>
+        <a class="front-link" href="#impacto">Ver medición de impacto <span aria-hidden="true">↗</span></a>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- SOLUCIONES CON IA -->
-<section id="ia">
+<section class="alt" id="ia">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Soluciones con IA</span>
@@ -159,7 +259,7 @@
         <span class="badge-new">Nuevo · Producto de lanzamiento</span>
         <div class="product-title">
           <span class="robot" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v6"/><circle cx="24" cy="5" r="2.2" fill="currentColor" stroke="none"/><rect x="9" y="12" width="30" height="24" rx="8"/><circle cx="18" cy="23" r="2.8" fill="currentColor" stroke="none"/><circle cx="30" cy="23" r="2.8" fill="currentColor" stroke="none"/><path d="M19 30h10"/><path d="M5 21v8M43 21v8"/><path d="M17 36v5M31 36v5"/></svg>
+            <svg viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M32 18V9" stroke="#073642" stroke-width="2.6"/><circle cx="32" cy="7.5" r="3.2" fill="#ff8fab"/><g stroke="#ff8fab" stroke-width="4.2"><path d="M16 27L8 20M14 34H5M16 41L8 48M48 27l8-7M50 34h9M48 41l8 7"/></g><g fill="#ff8fab"><circle cx="8" cy="20" r="3.4"/><circle cx="5" cy="34" r="3.4"/><circle cx="8" cy="48" r="3.4"/><circle cx="56" cy="20" r="3.4"/><circle cx="59" cy="34" r="3.4"/><circle cx="56" cy="48" r="3.4"/></g><ellipse cx="32" cy="35" rx="19" ry="16" fill="#e8fbfa" stroke="#073642" stroke-width="2.6"/><rect x="18" y="27" width="28" height="12" rx="6" fill="#073642"/><circle cx="25.5" cy="33" r="2.9" fill="#3cc6c8"/><circle cx="38.5" cy="33" r="2.9" fill="#3cc6c8"/><path d="M27.5 44q4.5 3.5 9 0" stroke="#073642" stroke-width="2.4"/><circle cx="20.5" cy="43" r="2.2" fill="#ff8fab" opacity=".7"/><circle cx="43.5" cy="43" r="2.2" fill="#ff8fab" opacity=".7"/></svg>
           </span>
           <h3>Mi Primer Agente</h3>
         </div>
@@ -244,7 +344,7 @@
 </section>
 
 <!-- INDUSTRIAS -->
-<section class="alt" id="industrias">
+<section id="industrias">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Para quién</span>
@@ -326,43 +426,6 @@
       </article>
     </div>
     <p class="note reveal">¿Tu giro no aparece? Si manejas clientes, documentos y fechas límite, probablemente podemos ayudarte. <a href="#contacto">Cuéntanos</a>.</p>
-  </div>
-</section>
-
-<!-- SERVICIOS -->
-<section id="servicios">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Qué hacemos</span>
-      <h2>Cuatro frentes, un objetivo: que tus datos trabajen para ti.</h2>
-      <p class="lead">Combinamos orden, automatización, cultura de datos y tecnología. Cada proyecto se diseña para tu negocio, no para una plantilla.</p>
-    </div>
-    <div class="grid g2">
-      <article class="card reveal">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <span class="tech">Gobernanza de datos</span>
-        <h3>Información ordenada, confiable y segura</h3>
-        <ul><li>Diagnóstico de tus fuentes y de la calidad de tus datos</li><li>Una sola definición para cada cifra del negocio</li><li>Accesos por rol, bitácora y respaldos</li><li>Buenas prácticas de protección de datos personales</li></ul>
-      </article>
-      <article class="card reveal">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
-        <span class="tech">Automatización</span>
-        <h3>Menos trabajo manual, menos errores</h3>
-        <ul><li>Lectura automática de facturas y documentos (OCR + IA)</li><li>Conciliación bancaria y contable</li><li>Recordatorios, cobranza y reportes que se envían solos</li><li>Asistentes de IA para tus tareas repetitivas</li><li>Conexión entre las herramientas que ya usas</li></ul>
-      </article>
-      <article class="card reveal">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.5 6 5.5"/></svg></div>
-        <span class="tech">Equipos data-driven</span>
-        <h3>Un equipo que decide con datos</h3>
-        <ul><li>Mapa de procesos e indicadores operativos</li><li>Rutinas semanales de revisión de cifras</li><li>Capacitación práctica con tus propios datos</li><li>Acompañamiento hasta que seas autónomo</li></ul>
-      </article>
-      <article class="card reveal">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div>
-        <span class="tech">Data Analytics</span>
-        <h3>Cifras claras y decisiones medibles</h3>
-        <ul><li>Tableros y alertas con tus indicadores clave</li><li>Pronósticos de flujo de caja, demanda y cobranza</li><li>Medición del efecto real de campañas y decisiones (Causal AI)</li><li>Base de datos central (Data Warehouse), flujos automáticos y APIs</li></ul>
-      </article>
-    </div>
   </div>
 </section>
 
@@ -543,6 +606,7 @@
       </div>
       <div><label for="msg">¿Qué tareas te quitan más tiempo? <span class="opt">(opcional)</span></label><textarea id="msg" name="mensaje" rows="3" placeholder="Ej. Hacer cotizaciones, dar seguimiento a clientes, cerrar el mes."></textarea></div>
       <input type="hidden" id="plan" name="interes" value="Diagnóstico">
+      <input type="hidden" id="dolores" name="problemas_marcados" value="">
       <p class="plan-chosen" id="plan-chosen" hidden>Paquete de interés: <strong></strong></p>
       <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button class="btn btn-primary" type="submit">Solicitar diagnóstico</button>
