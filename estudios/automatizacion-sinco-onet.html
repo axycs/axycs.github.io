@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SINCO y O*NET: automatización · Axycs</title>
+  <meta name="description" content="Estudio Axycs: emparejamos las 490 ocupaciones del catálogo SINCO 2019 del INEGI con O*NET mediante embeddings multilingües y les asignamos la probabilidad de automatización de Frey y Osborne. Diagrama Sankey interactivo.">
+  <meta name="theme-color" content="#0b4a5a">
+  <link rel="icon" href="../logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="study-page">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="../index.html" class="brand" aria-label="Axycs, inicio"><img src="../logo.svg" alt="" width="38" height="38"><span class="wordmark">Axycs</span></a>
+    <ul class="study-nav">
+      <li><a class="link" href="../index.html#estudios">← Estudios</a></li>
+      <li><a class="btn btn-primary btn-sm" href="../index.html#contacto">Diagnóstico sin costo</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="contenido">
+<section class="study-hero">
+  <div class="wrap">
+    <span class="eyebrow">Estudio 01 · Octubre 2026</span>
+    <h1>Del catálogo mexicano a O*NET: qué tan automatizables son las tareas de 490 ocupaciones</h1>
+    <p class="lead">Emparejamos cada grupo unitario del SINCO 2019 (INEGI) con sus dos ocupaciones más parecidas de O*NET usando modelos de lenguaje multilingües, y le asignamos la probabilidad de automatización de Frey y Osborne (2017).</p>
+
+    <div class="fronts tiles study-stats">
+      <article class="front stat"><span class="front-num">01</span><strong class="stat-num" data-k="grupos_unitarios">490</strong><h4>Grupos unitarios SINCO</h4><p>el nivel más fino del catálogo del INEGI.</p></article>
+      <article class="front stat"><span class="front-num">02</span><strong class="stat-num" data-k="onet_distintos">483</strong><h4>Ocupaciones O*NET</h4><p>distintas entre los 2 candidatos de cada grupo.</p></article>
+      <article class="front stat"><span class="front-num">03</span><strong class="stat-num" data-k="con_probabilidad">426</strong><h4>Con probabilidad</h4><p>las demás no tienen equivalente con dato de Frey y Osborne.</p></article>
+      <article class="front stat"><span class="front-num">04</span><strong class="stat-num" data-k="coincide_pct">46%</strong><h4>Coincidencia entre modelos</h4><p>grupos donde bge-m3 y e5 eligen el mismo primer candidato.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="explorar">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Explora el emparejamiento</span>
+      <h2>Cada ocupación mexicana, conectada con sus equivalentes en EE. UU.</h2>
+      <p class="lead">A la izquierda, los grupos del SINCO; a la derecha, las ocupaciones de O*NET. El grosor de cada flujo es el peso del candidato y el color, la probabilidad de automatización.</p>
+    </div>
+
+    <div class="sk-card">
+      <div class="sk-controls">
+        <div class="sk-field">
+          <label for="sk-grupo">Grupo principal del SINCO</label>
+          <select id="sk-grupo"></select>
+        </div>
+        <div class="sk-field sk-search">
+          <label for="sk-q">Busca una ocupación</label>
+          <input id="sk-q" type="search" placeholder="Ej. contadores, nutriólogos, choferes" autocomplete="off"
+                 role="combobox" aria-expanded="false" aria-controls="sk-list" aria-autocomplete="list">
+          <ul id="sk-list" class="auto-list" role="listbox" hidden></ul>
+        </div>
+        <div class="sk-legend" aria-hidden="true">
+          <span>Probabilidad de automatización</span>
+          <div class="sk-ramp"></div>
+          <div class="sk-ramp-ticks"><span>0%</span><span>50%</span><span>100%</span></div>
+        </div>
+      </div>
+
+      <div class="sk-body">
+        <p class="sk-hint" aria-hidden="true">Desliza el diagrama para ver las ocupaciones de O*NET →</p>
+        <div class="sk-scroll">
+          <svg id="sk-svg" role="img" aria-labelledby="sk-title"><title id="sk-title">Diagrama Sankey del grupo seleccionado</title></svg>
+        </div>
+        <aside class="sk-detail" id="sk-detail" aria-live="polite"></aside>
+      </div>
+      <details class="sk-table">
+        <summary>Ver los datos de este grupo como tabla</summary>
+        <div class="sk-table-wrap"><table id="sk-tabla"></table></div>
+      </details>
+      <div class="auto-tip" id="sk-tip" role="tooltip" hidden></div>
+    </div>
+  </div>
+</section>
+
+<section id="metodologia">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Metodología</span>
+      <h2>Cómo lo hicimos, en cuatro pasos.</h2>
+    </div>
+    <div class="fronts tiles">
+      <article class="front">
+        <span class="front-num">01</span>
+        <h3>Los textos</h3>
+        <p class="front-claim">Del SINCO: título ampliado, ocupaciones de ejemplo, descripción y funciones, en español. De O*NET: título y descripción, en inglés, sin traducir.</p>
+      </article>
+      <article class="front">
+        <span class="front-num">02</span>
+        <h3>Embeddings</h3>
+        <p class="front-claim">Convertimos cada texto en un vector con <a href="https://huggingface.co/BAAI/bge-m3">BAAI/bge-m3</a>, el modelo principal, y comparamos con similitud coseno. Como contraste usamos <a href="https://huggingface.co/intfloat/multilingual-e5-large">multilingual-e5-large</a>.</p>
+      </article>
+      <article class="front">
+        <span class="front-num">03</span>
+        <h3>Dos candidatos</h3>
+        <p class="front-claim">Cada grupo conserva sus 2 ocupaciones O*NET más parecidas. Su peso es un softmax de la similitud (τ = 0.05, provisional): no es una probabilidad de acierto.</p>
+      </article>
+      <article class="front">
+        <span class="front-num">04</span>
+        <h3>La probabilidad</h3>
+        <p class="front-claim">Pasamos de O*NET-SOC 2019 a SOC 2010 y tomamos la probabilidad de Frey y Osborne. La del grupo SINCO es el promedio ponderado de sus 2 candidatos. Nada se imputa.</p>
+      </article>
+    </div>
+
+    <div class="split study-notes">
+      <div>
+        <h3>Sobre los modelos</h3>
+        <ul class="check">
+          <li><strong>BAAI/bge-m3 (principal).</strong> Más de 100 idiomas, vectores de 1024 dimensiones, textos de hasta 8192 tokens, licencia MIT; modos denso, disperso y multivector.</li>
+          <li><strong>intfloat/multilingual-e5-large (contraste).</strong> Cerca de 100 idiomas, 1024 dimensiones, 512 tokens, licencia MIT; requiere el prefijo <code>query:</code> en ambos lados para similitud simétrica.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Cómo leerlo</h3>
+        <ul class="check">
+          <li><strong>Mide susceptibilidad, no pérdida de empleos.</strong> Frey y Osborne juzgaron con la tecnología de 2013 y no incluyen costos, salarios ni adopción.</li>
+          <li><strong>El emparejamiento es automático y no está validado.</strong> Hay <span data-k="baja_confianza">58</span> grupos con baja confianza y <span data-k="sin_coincidencia">25</span> sin coincidencia, que quedan sin probabilidad.</li>
+          <li><strong>Los modelos coinciden en menos de la mitad</strong> de los primeros candidatos: el emparejamiento entre catálogos sigue siendo un problema abierto.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="study-sources"><strong>Fuentes.</strong> INEGI, Sistema Nacional de Clasificación de Ocupaciones (SINCO) 2019. O*NET 31.0, U.S. Department of Labor, Employment and Training Administration (USDOL/ETA), licencia CC BY 4.0. Frey, C. B. y Osborne, M. A. (2017), "The future of employment: How susceptible are jobs to computerisation?", <em>Technological Forecasting and Social Change</em>, 114, 254–280. Corrida de emparejamiento <code data-k="run_id">match-A1</code>.</p>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">¿Y en tu negocio?</span>
+      <h2>Toda profesión tiene tareas que se pueden automatizar.</h2>
+      <p class="lead">La parte administrativa y contable siempre está: agenda, cobros, facturas, reportes. En el diagnóstico sin costo te decimos cuáles conviene automatizar primero.</p>
+    </div>
+    <div class="study-cta">
+      <a class="btn btn-primary" href="../index.html#contacto">Agenda tu diagnóstico sin costo</a>
+      <a class="btn btn-ghost" href="../index.html#industrias">Busca tu profesión</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="year">2026</span> Axycs · Crece sin dolor. Crece con datos.</div>
+    <div><a href="mailto:contacto.axycs@gmail.com">contacto.axycs@gmail.com</a></div>
+  </div>
+</footer>
+
+<script src="../data/sinco_onet.js" defer></script>
+<script src="sankey.js" defer></script>
+</body>
+</html>
