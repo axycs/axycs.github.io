@@ -180,25 +180,13 @@ p { margin: 0 0 1em; }
 .tiles > :nth-child(4n+4) { --tint: var(--tint-4); }
 .tile { background: var(--tint, var(--tint-1)); border: 0; border-radius: 22px; }
 .tile h3, .tile h4 { text-transform: uppercase; letter-spacing: .04em; color: var(--deep); }
-.tile ul:not(.kpis) { list-style: none; padding: 0; }
-.tile ul:not(.kpis) li { padding: 5px 0; margin: 0; border-top: 1px solid rgba(11, 74, 90, .12); }
-.tile .pill { background: rgba(255, 255, 255, .7); }
-.tile .kpis li, .tile .sector-kpi { border-color: rgba(11, 74, 90, .15); }
+.tile ul { list-style: none; padding: 0; }
+.tile ul li { padding: 5px 0; margin: 0; border-top: 1px solid rgba(11, 74, 90, .12); }
+.tile .sector-kpi { border-color: rgba(11, 74, 90, .15); }
 .tile .outcome { background: rgba(255, 255, 255, .65); }
 
 /* Industrias */
-.ind { padding: 34px; }
-.ind h3 { font-size: 1.5rem; }
-.pills { margin-top: 16px; }
-.pill { display: inline-block; font-size: .8rem; background: var(--mist); color: var(--deep); padding: 4px 12px; border-radius: 999px; margin: 0 6px 6px 0; font-weight: 600; }
 .kpi-title { margin-top: 18px !important; font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep) !important; }
-.card ul.kpis { list-style: none; padding: 0; margin-top: 8px; }
-.kpis li { padding: 8px 0 8px 26px; border-bottom: 1px dashed var(--line); position: relative; color: var(--ink); }
-.kpis li:last-child { border-bottom: 0; }
-.kpis li::before {
-  content: ""; position: absolute; left: 0; top: 12px; width: 16px; height: 16px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231fa9b0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 17l6-6 4 4 8-8M15 7h6v6'/%3E%3C/svg%3E") center/contain no-repeat;
-}
 
 .g4 { grid-template-columns: repeat(4, 1fr); }
 .sectors-title { margin: 56px 0 20px; font-size: 1.35rem; }
@@ -305,7 +293,7 @@ p { margin: 0 0 1em; }
 .pkg .btn { margin-top: 22px; text-align: center; }
 .pkg.featured { background: linear-gradient(170deg, var(--deep-2), var(--deep)); color: var(--white); border: 0; }
 .pkg.featured h3 { color: var(--white); }
-.pkg.featured ul:not(.kpis) li { border-color: rgba(255, 255, 255, .15); }
+.pkg.featured ul li { border-color: rgba(255, 255, 255, .15); }
 .pkg.featured .for, .pkg.featured ul { color: #cfe8eb; }
 .pkg.featured .level { color: var(--aqua); }
 .pkg.featured .outcome { background: rgba(255,255,255,.1); color: var(--white); }
@@ -391,7 +379,7 @@ footer a { color: var(--aqua); text-decoration: none; }
   .front-art { max-height: 150px; }
   .hero .cta .btn { width: 100%; text-align: center; }
   .figs { width: 100%; }
-  .ind, .card { padding: 24px; }
+  .card { padding: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -473,3 +461,16 @@ footer a { color: var(--aqua); text-decoration: none; }
   .bar-track { grid-column: 1; }
   .bar-axis > span:first-child { display: none; }
 }
+.auto-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
+.stat { padding: 22px 24px; border-radius: 22px; display: flex; flex-direction: column; gap: 4px; }
+.stat strong { font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--deep); font-variant-numeric: tabular-nums; }
+.stat span { font-size: .92rem; color: var(--muted); line-height: 1.4; }
+.stat.tile { --tint: var(--tint-2); }
+.stat-hot { background: linear-gradient(150deg, var(--deep-2), var(--deep)); }
+.stat-hot strong { color: var(--aqua); }
+.stat-hot span { color: #cfe8eb; }
+.auto-study { margin-top: 0; }
+@media (max-width: 760px) {
+  .auto-stats { grid-template-columns: 1fr; }
+}
+#industrias .section-head { margin-bottom: 28px; }
