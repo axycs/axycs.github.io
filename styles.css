@@ -472,3 +472,22 @@ footer a { color: var(--aqua); text-decoration: none; }
 .front h4 label { font: inherit; color: inherit; letter-spacing: inherit; }
 .front .auto-list { padding: 6px; margin: 0; flex: none; }
 .front .auto-list li { border-top: 0; padding: 8px 10px; }
+
+/* Para quién compacto (30% menos alto) */
+#industrias .front { padding: 16px 18px 18px; }
+#industrias .front-art.sm { aspect-ratio: auto; height: 52px; margin-bottom: 6px; }
+#industrias .stat-num { font-size: clamp(1.6rem, 2.6vw, 1.9rem); margin: 0 0 2px; }
+#industrias .front h4 { font-size: .9rem; margin: 2px 0 4px; }
+#industrias .stat p, #industrias .front-claim { font-size: .84rem; margin-bottom: 6px; }
+#industrias .auto-stats, #industrias .auto-grid { gap: 14px; }
+#industrias .auto-stats { margin-bottom: 14px; }
+#industrias .bar-row { padding-top: 2px; padding-bottom: 2px; font-size: .8rem; }
+#industrias .bar-track { height: 10px; }
+#industrias .auto-search input { padding: 9px 12px; }
+#industrias .auto-result { margin: 10px 0 8px; min-height: 92px; }
+#industrias .auto-big { font-size: 2rem; margin-bottom: 2px; }
+#industrias .auto-msg { font-size: .84rem; margin-bottom: 2px; }
+#industrias .auto-hist-title { font-size: .7rem; margin-bottom: 4px; }
+#industrias .auto-hist { height: 56px; }
+#industrias .auto-card .front-link { margin-top: 12px; font-size: .84rem; }
+#industrias .bars-axis { margin-top: 2px; }
