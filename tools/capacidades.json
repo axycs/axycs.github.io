@@ -1,0 +1,170 @@
+{
+  "_que_es": "Mapeo mantenible entre las capacidades de Mi Primer Agente y las funciones del SINCO 2019. Una función queda marcada si su texto coincide con algún patrón de una capacidad y con ninguna exclusión (de la capacidad o global). Los patrones son expresiones regulares de Python sobre el texto en minúsculas y sin acentos. Clasificación orientativa: el alcance real de cada cliente se confirma en el diagnóstico.",
+  "_fuentes": [
+    "ESTRUCTURA_EMPRESA.md, sección Mi Primer Agente: problema (cotizaciones, seguimiento de clientes, reportes, correspondencia, organización de archivos), perfiles (planes, recordatorios, material para pacientes; correspondencia y solicitud de documentos), No incluye y Restricciones operativas",
+    "web/index.html, sección Soluciones con IA: Cotizaciones, Seguimiento de clientes, Correos y cartas, Reportes, Organización de archivos, Lectura de facturas"
+  ],
+  "_version": "2026-10-30",
+  "capacidades": [
+    {
+      "id": "informes",
+      "nombre": "Reportes e informes",
+      "que_hace": "Arma borradores de reportes e informes con la información de tus archivos.",
+      "patrones": [
+        "\\binformes?\\b",
+        "\\breportes?\\b",
+        "\\bresumen(es)?\\b"
+      ],
+      "exclusiones": []
+    },
+    {
+      "id": "correspondencia",
+      "nombre": "Correos, cartas y documentos",
+      "que_hace": "Redacta correos, oficios y documentos para que tú los revises y envíes.",
+      "patrones": [
+        "\\bcorrespondencia\\b",
+        "\\bredact(ar|a|an)\\b",
+        "\\bcorreos? electronicos?\\b",
+        "\\bmemorandums?\\b",
+        "\\bcomunicados?\\b",
+        "\\b(elaborar|redactar|contestar) (los |las )?(oficios|cartas)\\b"
+      ],
+      "exclusiones": [
+        "\\b(repartir|reparte|entregar|entrega|colocarla|pichonera)\\b",
+        "\\b(novelas?|poesia|guiones|obras de teatro)\\b"
+      ]
+    },
+    {
+      "id": "archivos",
+      "nombre": "Organización de archivos",
+      "que_hace": "Ordena, nombra y localiza documentos dentro de las carpetas que autorizas.",
+      "patrones": [
+        "\\barchiv(ar|a|an)\\b",
+        "\\b(el|los|del|su|sus) archivos?\\b",
+        "\\bexpedientes?\\b",
+        "\\bclasificar\\b.*\\bdocumentos\\b",
+        "\\bcontrol de (los )?documentos\\b",
+        "\\b(tramitar|integrar|ordenar|organizar|clasificar|preparar|elaborar|revisar) [^.]{0,30}\\bdocumentacion\\b"
+      ],
+      "exclusiones": [
+        "\\bpacientes?\\b",
+        "\\btratamientos?\\b",
+        "\\bsintomas\\b"
+      ]
+    },
+    {
+      "id": "agenda",
+      "nombre": "Agenda y recordatorios",
+      "que_hace": "Organiza citas y compromisos y prepara recordatorios.",
+      "patrones": [
+        "\\b(en|la|su|de|una) agenda\\b",
+        "\\bcitas\\b",
+        "\\brecordar(le|les)?\\b",
+        "\\brecordatorios?\\b",
+        "\\borganizacion de (las )?reuniones\\b",
+        "\\bprogramar (las )?(reuniones|citas|entrevistas|visitas)\\b"
+      ],
+      "exclusiones": [
+        "\\bforos?\\b",
+        "\\bdebates?\\b"
+      ]
+    },
+    {
+      "id": "cotizaciones",
+      "nombre": "Cotizaciones",
+      "que_hace": "Prepara cotizaciones y presupuestos con tus precios y plantillas.",
+      "patrones": [
+        "\\bcotiza",
+        "\\b(elaborar|preparar|formular|calcular) (los |el |un |la )?(presupuestos?|cotizacion(es)?)\\b",
+        "\\bpropuestas? (comercial|comerciales|economica|economicas|de servicio)"
+      ],
+      "exclusiones": [
+        "\\bbolsa\\b"
+      ]
+    },
+    {
+      "id": "facturas",
+      "nombre": "Lectura de facturas y recibos",
+      "que_hace": "Lee facturas y recibos y pasa sus datos a una tabla.",
+      "patrones": [
+        "\\bfactur",
+        "\\brecibos\\b",
+        "\\bnotas de venta\\b",
+        "\\bfichas de venta\\b"
+      ],
+      "exclusiones": [
+        "\\bcontabilidad\\b",
+        "\\bprensas?\\b",
+        "\\bdar cambio\\b"
+      ]
+    },
+    {
+      "id": "seguimiento",
+      "nombre": "Seguimiento de clientes y solicitudes",
+      "que_hace": "Ordena solicitudes y prepara mensajes de seguimiento para tus clientes.",
+      "patrones": [
+        "\\bseguimiento (a|de|al) (los |las )?(clientes|solicitudes|pedidos|tramites|cobros|pagos|asuntos|casos|contratos)\\b",
+        "\\bsolicitudes\\b",
+        "\\brenovacion(es)?\\b",
+        "\\bcobranza\\b",
+        "\\bquejas\\b"
+      ],
+      "exclusiones": [
+        "\\bpacientes?\\b",
+        "\\btratamientos?\\b",
+        "\\bsalud\\b",
+        "\\bvisitar\\b"
+      ]
+    },
+    {
+      "id": "material",
+      "nombre": "Material para clientes o pacientes",
+      "que_hace": "Prepara material informativo a partir de tus plantillas.",
+      "patrones": [
+        "\\b(elaborar|desarrollar|preparar|formular|redactar|disenar)\\b[^.]{0,40}\\b(materiales? (educativos?|didacticos?|informativos?|de difusion|promocionales?)|folletos?|boletin(es)?|instructivos)\\b"
+      ],
+      "exclusiones": []
+    },
+    {
+      "id": "datos",
+      "nombre": "Registro y orden de datos",
+      "que_hace": "Captura y ordena datos en hojas de cálculo.",
+      "patrones": [
+        "\\bcaptur(ar|a|an) (los |las )?(datos|informacion|registros)\\b",
+        "\\bcaptura de (datos|informacion)\\b",
+        "\\binformacion capturada\\b",
+        "\\bhojas? de calculo\\b",
+        "\\bregistr(ar|a|an) (los |las )?(datos|movimientos|operaciones)\\b"
+      ],
+      "exclusiones": [
+        "\\bcontabilidad\\b"
+      ]
+    }
+  ],
+  "exclusiones_globales": [
+    {
+      "patron": "\\bdiagnostic",
+      "motivo": "Decisión clínica: es del profesional"
+    },
+    {
+      "patron": "\\bhistorial(es)? (clinicos?|medicos?)\\b|\\bexpedientes? (clinicos?|medicos?)\\b|\\bhistoria clinica\\b|\\bsignos vitales\\b",
+      "motivo": "Sin expedientes clínicos"
+    },
+    {
+      "patron": "\\bprescrib|\\breceta(s|r)? medic",
+      "motivo": "Decisión clínica: es del profesional"
+    },
+    {
+      "patron": "\\bdeclaracion(es)? (tributarias?|fiscal(es)?|de impuestos)\\b|\\bante el fisco\\b",
+      "motivo": "Sin acceso a declaraciones fiscales"
+    },
+    {
+      "patron": "\\bdemandas? (judicial|judiciales|legales?|laborales?)\\b|\\brevisar (y/o )?demandas\\b|\\bdemandas, contratos\\b|\\btribunal(es)?\\b|\\bjuicios?\\b|\\bdiligencias? judicial|\\bjuridic",
+      "motivo": "No incluye asesoría legal"
+    },
+    {
+      "patron": "\\bdictamin",
+      "motivo": "Juicio profesional: es del profesional"
+    }
+  ]
+}

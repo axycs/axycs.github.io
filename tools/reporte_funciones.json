@@ -1,0 +1,82 @@
+{
+ "corridas": {
+  "sonnet_01": {
+   "filas": 3542,
+   "llaves_duplicadas": 0,
+   "clases_desconocidas": 0
+  },
+  "sonnet_02": {
+   "filas": 3542,
+   "llaves_duplicadas": 0,
+   "clases_desconocidas": 0
+  },
+  "haiku_01": {
+   "filas": 3542,
+   "llaves_duplicadas": 0,
+   "clases_desconocidas": 0
+  },
+  "haiku_02": {
+   "filas": 3542,
+   "llaves_duplicadas": 0,
+   "clases_desconocidas": 0
+  },
+  "opus_01": {
+   "filas": 3542,
+   "llaves_duplicadas": 0,
+   "clases_desconocidas": 0
+  },
+  "opus_02": {
+   "filas": 3542,
+   "llaves_duplicadas": 0,
+   "clases_desconocidas": 0
+  }
+ },
+ "anotaciones_sin_funcion": [],
+ "texto_distinto": 0,
+ "funciones": 3542,
+ "funciones_llave_duplicada": 0,
+ "funciones_sin_anotacion": [],
+ "funciones_anotacion_incompleta": [],
+ "ocupaciones": 490,
+ "ocupaciones_codigo_duplicado": 0,
+ "funciones_de_grupos_fuera_de_main": [],
+ "ocupaciones_sin_funciones": [
+  "1129",
+  "1319",
+  "1329",
+  "1619",
+  "1629",
+  "1999",
+  "2339",
+  "2399",
+  "2639",
+  "2649",
+  "2991",
+  "2992",
+  "3999",
+  "4999",
+  "5119",
+  "5299",
+  "5319",
+  "5419",
+  "6119",
+  "6129",
+  "6999",
+  "7199",
+  "7299",
+  "7399",
+  "7599",
+  "7999",
+  "8199",
+  "8349",
+  "8999",
+  "9239",
+  "9599",
+  "9899",
+  "9999"
+ ],
+ "max_dif_exposicion_ocupacion": 2.220446049250313e-16,
+ "funciones_con_capacidad": 128,
+ "funciones_bloqueadas_por_exclusion_global": 8,
+ "ocupaciones_con_alguna_capacidad": 82
+}

@@ -1,0 +1,67 @@
+{
+  "_que_es": "Palabras de búsqueda coloquiales que el catálogo SINCO no usa. Clave: código SINCO; valor: términos extra. Solo afectan la búsqueda, nunca los datos mostrados.",
+  "2121": [
+    "contador",
+    "contadora",
+    "auditor",
+    "contabilidad",
+    "despacho contable"
+  ],
+  "2135": [
+    "licenciado en derecho",
+    "jurídico"
+  ],
+  "2142": [
+    "psicoterapeuta",
+    "terapeuta"
+  ],
+  "2411": [
+    "doctor",
+    "doctora",
+    "médico"
+  ],
+  "2433": [
+    "nutrióloga",
+    "nutricionista",
+    "dietista"
+  ],
+  "2437": [
+    "fisioterapia",
+    "fisio",
+    "terapeuta físico",
+    "terapista físico",
+    "rehabilitación"
+  ],
+  "2436": [
+    "enfermero",
+    "enfermera"
+  ],
+  "3111": [
+    "secretaria",
+    "secretario",
+    "asistente administrativa"
+  ],
+  "2511": [
+    "asistente administrativo",
+    "auxiliar administrativo"
+  ],
+  "2412": [
+    "odontólogo",
+    "odontóloga",
+    "dentista"
+  ],
+  "4222": [
+    "agente de seguros",
+    "promotor de seguros",
+    "vendedor de seguros"
+  ],
+  "4223": [
+    "asesor inmobiliario",
+    "agente inmobiliario",
+    "corredor de bienes raíces"
+  ],
+  "4221": [
+    "vendedor independiente",
+    "representante de ventas"
+  ]
+}

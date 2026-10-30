@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Qué puede hacer Mi Primer Agente en tu ocupación? · Axycs</title>
+  <meta name="description" content="Busca tu ocupación entre las 490 del catálogo SINCO del INEGI: mira sus funciones, cuáles están más expuestas a la IA y en cuáles te puede ayudar Mi Primer Agente.">
+  <meta name="theme-color" content="#0b4a5a">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="study-page">
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand" aria-label="Axycs, inicio"><img src="logo.svg" alt="" width="38" height="38"><span class="wordmark">Axycs</span></a>
+    <ul class="study-nav">
+      <li><a class="link" href="index.html#mi-primer-agente">Mi Primer Agente</a></li>
+      <li><a class="btn btn-primary btn-sm" href="index.html#contacto">Diagnóstico sin costo</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="contenido">
+<section class="study-hero px-hero">
+  <div class="wrap">
+    <span class="eyebrow">Explorador de ocupaciones</span>
+    <h1>¿En qué tareas de tu ocupación te ayuda <em>Mi Primer Agente</em>?</h1>
+    <p class="lead">Busca tu ocupación entre las 490 del catálogo SINCO del INEGI y mira sus funciones: cuáles están más expuestas a la IA y en cuáles te puede ayudar el agente.</p>
+
+    <div class="px-search" role="search">
+      <label for="px-q" class="sr-only">Busca tu ocupación</label>
+      <svg class="px-search-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="px-q" type="search" placeholder="Ej. contador, nutrióloga, agente de seguros o un código como 2121" autocomplete="off" maxlength="80"
+             role="combobox" aria-expanded="false" aria-controls="px-list" aria-autocomplete="list">
+      <ul id="px-list" class="auto-list px-list" role="listbox" hidden></ul>
+    </div>
+    <ul class="px-quick" aria-label="Ocupaciones frecuentes">
+      <li><button type="button" data-c="2121">Contadores</button></li>
+      <li><button type="button" data-c="2433">Nutriólogos</button></li>
+      <li><button type="button" data-c="2437">Fisioterapeutas</button></li>
+      <li><button type="button" data-c="4222">Agentes de seguros</button></li>
+      <li><button type="button" data-c="4223">Bienes raíces</button></li>
+      <li><button type="button" data-c="3111">Secretarias</button></li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt px-out" id="resultado" hidden aria-live="polite">
+  <div class="wrap">
+    <div class="px-head">
+      <span class="px-code" id="px-code"></span>
+      <h2 id="px-title"></h2>
+    </div>
+
+    <div class="fronts tiles px-sum">
+      <article class="front px-agent">
+        <span class="front-num">Mi Primer Agente</span>
+        <p class="px-big" id="px-n"></p>
+        <h4>Funciones en las que puede ayudar</h4>
+        <ul class="px-caps" id="px-caps"></ul>
+      </article>
+      <article class="front">
+        <span class="front-num">Probabilidad de automatización</span>
+        <p class="px-big" id="px-p"></p>
+        <div class="px-bar" aria-hidden="true"><span id="px-pbar"></span></div>
+        <p class="px-note" id="px-pnote">Frey y Osborne (2017), para la ocupación completa.</p>
+      </article>
+      <article class="front">
+        <span class="front-num">Exposición a la IA</span>
+        <p class="px-big" id="px-x"></p>
+        <span class="px-meter" id="px-xm" aria-hidden="true"></span>
+        <p class="px-note">Promedio de sus funciones.</p>
+      </article>
+    </div>
+
+    <div class="px-explain" id="px-explain"></div>
+
+    <div class="px-tools">
+      <h3>Funciones de la ocupación</h3>
+      <div class="px-tools-in">
+        <label class="sr-only" for="px-f">Filtrar funciones</label>
+        <input id="px-f" type="search" placeholder="Filtrar funciones" autocomplete="off">
+        <label class="sr-only" for="px-ord">Ordenar funciones</label>
+        <select id="px-ord">
+          <option value="expuestas">Más expuestas a la IA primero</option>
+          <option value="catalogo">Orden del catálogo</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="px-groups">
+      <div class="px-group px-group-yes">
+        <h4><img src="agente.svg" alt="" width="28" height="28"> Mi Primer Agente puede ayudar <span id="px-ny"></span></h4>
+        <ul class="px-fns" id="px-yes"></ul>
+      </div>
+      <div class="px-group">
+        <h4>Otras funciones de la ocupación <span id="px-nn"></span></h4>
+        <ul class="px-fns" id="px-no"></ul>
+      </div>
+    </div>
+
+    <ul class="px-legend">
+      <li><strong>Mi Primer Agente puede ayudar:</strong> la función entra en lo que hace el producto (reportes, correos, archivos, agenda, cotizaciones, facturas, seguimiento). Es orientativo: lo confirmamos contigo en el diagnóstico.</li>
+      <li><strong>Exposición a la IA:</strong> qué tanto la IA podría hacer o acelerar esa función. Es una estimación propia sin validar; no dice que la función vaya a desaparecer.</li>
+      <li><strong>Probabilidad de automatización:</strong> la de Frey y Osborne (2017), para la ocupación completa; no se calcula por función.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Mi Primer Agente</span>
+      <h2>Deja de buscar información. Empieza a resolver.</h2>
+      <p class="lead">En el diagnóstico sin costo elegimos contigo las tareas que más tiempo te quitan y vemos si el agente es la herramienta adecuada.</p>
+    </div>
+    <div class="study-cta">
+      <a class="btn btn-primary" href="index.html#contacto" id="px-cta" data-plan="Mi Primer Agente">Agenda tu diagnóstico sin costo</a>
+      <a class="btn btn-ghost" href="index.html#mi-primer-agente">Ver Mi Primer Agente</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="year">2026</span> Axycs · Crece sin dolor. Crece con datos.</div>
+    <ul class="social social-sm" aria-label="Redes sociales"><li><a href="https://www.instagram.com/axycs.it/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><span>@axycs.it</span></a></li><li><a href="https://www.linkedin.com/company/axycs" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4z"/></svg><span>LinkedIn</span></a></li></ul>
+    <div><a href="mailto:contacto.axycs@gmail.com">contacto.axycs@gmail.com</a></div>
+  </div>
+</footer>
+
+<script src="data/ocupaciones.js" defer></script>
+<script src="buscador.js" defer></script>
+<script src="explorador.js" defer></script>
+</body>
+</html>
