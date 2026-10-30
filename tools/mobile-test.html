@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>body{margin:0;display:flex;gap:20px;align-items:flex-start;background:#888}iframe{border:0;background:#fff;flex:none}pre{flex:none}</style></head>
+<body>
+<script>
+  // Prueba en celular: abre una página en anchos reales (iframe, porque Chrome headless no baja de ~500 px)
+  // y reporta los elementos que se salen del ancho. Uso: tools/mobile-test.html?p=../index.html&w=360,390&h=13000
+  var page = new URLSearchParams(location.search).get("p") || "../index.html";
+  var widths = (new URLSearchParams(location.search).get("w") || "360,375,414").split(",").map(Number);
+  var H = Number(new URLSearchParams(location.search).get("h") || 800);
+  var out = document.createElement("pre"); out.id = "report"; document.body.appendChild(out);
+  widths.forEach(function (w) {
+    var f = document.createElement("iframe");
+    f.width = w; f.height = H; f.src = page;
+    f.onload = function () {
+      setTimeout(function () {
+        var d = f.contentDocument, vw = d.documentElement.clientWidth, bad = [];
+        d.querySelectorAll("body *").forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.width && (r.right > vw + 1 || r.left < -1)) {
+            var cs = f.contentWindow.getComputedStyle(el);
+            if (cs.position === "fixed" || el.closest("[hidden]")) return;
+            bad.push((el.id ? "#" + el.id : el.tagName.toLowerCase() + "." + String(el.className).split(" ").join(".")) + " L" + Math.round(r.left) + " R" + Math.round(r.right));
+          }
+        });
+        out.textContent += "W" + w + " scrollWidth=" + d.documentElement.scrollWidth + " clientWidth=" + vw + " desbordes=" + bad.length + "\n" + bad.slice(0, 25).join("\n") + "\n\n";
+      }, 3500);
+    };
+    document.body.insertBefore(f, out);
+  });
+</script>
+</body></html>

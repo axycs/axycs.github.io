@@ -8,7 +8,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var NIVEL = { baja: "Baja", media: "Media", alta: "Alta" };
-  var MAX_TAREAS = 4, EJEMPLO = "2121";
+  var MAX_TAREAS = window.matchMedia && matchMedia("(max-width: 560px)").matches ? 2 : 4, EJEMPLO = "2121";
   var D = null, IDX = null, POR = {}, pendiente = null;
 
   // ---------- carga diferida ----------

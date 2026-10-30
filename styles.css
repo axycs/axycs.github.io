@@ -737,3 +737,52 @@ footer .wrap { align-items: center; }
 @media (prefers-reduced-motion: reduce) {
   .pq-in .pq-tasks li, .pq-in .pq-big strong { animation: none; }
 }
+
+/* Celular: tarjetas en carrusel deslizable para acortar la página */
+.swipe-hint { display: none; }
+@media (max-width: 760px) {
+  #servicios .fronts, #proceso .steps, #paquetes .g3 {
+    display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 84%; gap: 14px;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin-inline: -20px; padding: 4px 20px 16px; scroll-padding-inline: 20px; scrollbar-width: none;
+  }
+  #servicios .fronts::-webkit-scrollbar, #proceso .steps::-webkit-scrollbar, #paquetes .g3::-webkit-scrollbar { display: none; }
+  #servicios .fronts > *, #proceso .steps > *, #paquetes .g3 > * { scroll-snap-align: start; }
+  .js #servicios .fronts > .reveal, .js #proceso .steps > .reveal, .js #paquetes .g3 > .reveal { opacity: 1; transform: none; }
+  #servicios .front-art { max-height: 120px; }
+  .swipe-hint { display: block; margin: 2px 0 0; font-size: .82rem; font-weight: 600; color: var(--teal-dark); text-align: right; }
+  /* iPhone hace zoom al enfocar campos con letra menor a 16 px */
+  input, select, textarea, .px-tools-in input, .px-tools-in select { font-size: 16px; }
+}
+@media (max-width: 560px) {
+  .pq-head h2 { font-size: 1.6rem; }
+  .pq-head .lead { font-size: 1rem; }
+  .pq-search { margin-top: 22px; }
+  .pq-quick { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-inline: -20px; padding: 0 20px 4px; scrollbar-width: none; }
+  .pq-quick::-webkit-scrollbar { display: none; }
+  .pq-quick li { flex: none; }
+  .pq-card { margin-top: 22px; border-radius: 22px; }
+  .pq-left, .pq-right { padding: 20px 18px; }
+  .pq-left h3 { margin-bottom: 8px; }
+  .pq-big strong { font-size: 3rem; }
+  .pq-caps { margin-bottom: 16px; }
+  .pq-actions .btn { width: 100%; text-align: center; }
+  .pq-tasks li { padding: 10px 12px; }
+  .pq-tasks li p { font-size: .88rem; }
+  .pq-metrics { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pq-metrics strong { font-size: 1.35rem; }
+  .pq-more summary { font-size: .92rem; }
+}
+/* Páginas internas: el encabezado conserva el botón en celular (no tienen menú desplegable) */
+@media (max-width: 960px) {
+  .nav ul.study-nav { display: flex; position: static; flex-direction: row; padding: 0; gap: 14px; border: 0; background: none; }
+}
+@media (max-width: 560px) {
+  .study-nav li:first-child { display: none; }
+  .study-nav .btn-sm { padding: 9px 14px; font-size: .85rem; }
+  .px-sum { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .px-sum .px-agent { grid-column: 1 / -1; }
+  .px-sum .front { padding: 16px; }
+  .px-sum .px-big { font-size: 1.7rem; }
+  .px-sum .front-num { font-size: .68rem; }
+}
