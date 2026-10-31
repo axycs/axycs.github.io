@@ -13,14 +13,16 @@
   }
   // Raíz sencilla: "nutriólogos" y "nutriologo" -> "nutriolog"
   function stem(w) { return w.length > 4 ? w.replace(/(es|as|os|a|o|s)$/, "") : w; }
+  function palabras(s) { return norm(s).split(/[^a-z0-9]+/).filter(Boolean); }
   function tokens(s) {
-    return norm(s).split(/[^a-z0-9]+/).filter(function (w) { return w && !STOP[w]; }).map(stem);
+    return palabras(s).filter(function (w) { return !STOP[w]; }).map(stem);
   }
 
-  // Se construye una sola vez al cargar la página
+  // Se construye una sola vez al cargar la página. t/k: raíces; tc/kc: palabras completas (para la palabra que se está escribiendo)
   function indexar(occ) {
     return occ.map(function (o, i) {
-      return { i: i, c: o.c, t: tokens(o.t), k: tokens((o.k || []).join(" ")), len: o.t.length };
+      var k = (o.k || []).join(" ");
+      return { i: i, c: o.c, t: tokens(o.t), k: tokens(k), tc: palabras(o.t), kc: palabras(k), len: o.t.length };
     });
   }
 
@@ -35,16 +37,20 @@
 
   /* Devuelve índices de ocupaciones ordenados por relevancia.
      Código: prefijo del código SINCO. Texto: cada palabra debe empezar alguna palabra del título o de las palabras clave
-     (ocupaciones de ejemplo del INEGI y sinónimos); pesa más el título. */
+     (ocupaciones de ejemplo del INEGI y sinónimos); pesa más el título.
+     La última palabra puede estar a medias mientras se escribe ("auditore", "con", "c"): también se compara completa,
+     sin raíz, y si es una palabra vacía ("de") no es obligatoria. */
   function buscar(idx, q, limite) {
     limite = limite || 8;
-    q = String(q || "").trim();
+    var raw = String(q || "");
+    q = raw.trim();
     if (!q) return [];
     if (/^\d{1,4}$/.test(q)) {
       return idx.filter(function (e) { return e.c.indexOf(q) === 0; }).slice(0, limite).map(function (e) { return e.i; });
     }
-    var qs = tokens(q).filter(function (w) { return w.length >= 2; });
-    if (!qs.length) return [];
+    var ps = palabras(q), escribiendo = /[a-z0-9]$/i.test(norm(raw)) ? ps.pop() : null;
+    var qs = ps.filter(function (w) { return !STOP[w]; }).map(stem);
+    if (!qs.length && !escribiendo) return [];
     var res = [];
     for (var n = 0; n < idx.length; n++) {
       var e = idx[n], score = 0, ok = true;
@@ -54,7 +60,15 @@
         score += mt ? 3 + mt : mk;
       }
       if (!ok) continue;
-      if (e.t[0] && e.t[0].indexOf(qs[0]) === 0) score += 2;
+      var primera = qs[0];
+      if (escribiendo) {
+        var st = stem(escribiendo), lt = prefijo(e.t, st) || prefijo(e.tc, escribiendo);
+        var lk = lt ? 0 : prefijo(e.k, st) || prefijo(e.kc, escribiendo);
+        if (lt || lk) score += lt ? 3 + lt : lk;
+        else if (!STOP[escribiendo] || !qs.length) continue;
+        if (!primera) primera = lt || lk ? escribiendo : null;
+      }
+      if (primera && e.tc[0] && e.tc[0].indexOf(primera) === 0) score += 2;
       res.push([score, e.len, e.i]);
     }
     res.sort(function (a, b) { return b[0] - a[0] || a[1] - b[1]; });

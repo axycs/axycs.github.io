@@ -34,6 +34,19 @@ test("busca por palabras clave: ocupaciones de ejemplo y sinónimos", () => {
   assert.ok(top("cirujano dental").includes("2412"));
 });
 
+test("muestra resultados mientras se escribe, letra por letra", () => {
+  for (const q of ["contador", "contadores y auditores", "abogado", "nutrióloga"]) {
+    for (let n = 1; n <= q.length; n++) {
+      if (q[n - 1] === " ") continue;
+      assert.ok(top(q.slice(0, n)).length > 0, `"${q.slice(0, n)}" sin resultados`);
+    }
+  }
+  assert.equal(top("Contadores y auditore")[0], "2121");     // palabra a medias
+  assert.equal(top("con")[0], "2121");                       // "con" no se descarta mientras se escribe
+  assert.ok(["4222", "4223"].every((c) => top("agente de").includes(c)));   // palabra vacía al final: opcional
+  assert.ok(top("de").includes("2412"));                      // "de" puede ser el inicio de "dentista"
+});
+
 test("búsquedas vacías o sin coincidencia", () => {
   assert.deepEqual(top(""), []);
   assert.deepEqual(top("   "), []);
