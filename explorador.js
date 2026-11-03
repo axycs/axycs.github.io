@@ -92,7 +92,7 @@
         caps.map(function (c) { return "<strong>" + esc(c.n.toLowerCase()) + "</strong>"; }).join(", ") + ".</p>" +
         '<ul class="px-what">' + caps.map(function (c) { return "<li>" + esc(c.q) + "</li>"; }).join("") + "</ul>";
     } else {
-      txt = "<p>Las funciones que el INEGI describe para esta ocupación son de trabajo directo con personas, decisiones profesionales o trabajo físico: ahí el agente no participa. " +
+      txt = "<p>Las funciones que el INEGI describe para esta ocupación son de trabajo directo con personas, decisiones profesionales o trabajo físico, o tienen poca exposición a la IA: ahí el agente no participa. " +
         "Pero la parte administrativa de tu consultorio, despacho o negocio (agenda, recordatorios, correos, cotizaciones, facturas y archivos) sí la puede apoyar.</p>";
     }
     $("px-explain").innerHTML = '<img src="agente.svg" alt="" width="56" height="56"><div>' + txt +

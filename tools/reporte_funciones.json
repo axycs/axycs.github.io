@@ -76,7 +76,8 @@
   "9999"
  ],
  "max_dif_exposicion_ocupacion": 2.220446049250313e-16,
- "funciones_con_capacidad": 128,
- "funciones_bloqueadas_por_exclusion_global": 8,
- "ocupaciones_con_alguna_capacidad": 82
+ "funciones_con_capacidad": 445,
+ "funciones_con_regla_pero_exposicion_baja": 24,
+ "funciones_bloqueadas_por_exclusion_global": 13,
+ "ocupaciones_con_alguna_capacidad": 171
 }

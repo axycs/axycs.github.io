@@ -48,6 +48,25 @@ def test_reglas_bien_formadas():
     ("Capturar datos de encuestas, registros administrativos, nóminas, etcétera.", "datos"),
     ("Escuchar y resolver las quejas de los clientes respecto al producto o servicios.", "seguimiento"),
     ("Planear, dirigir y evaluar programas de educación nutricional y desarrollar materiales educativos para estudiantes.", "material"),
+    # ampliación 2026-11-03: trabajo de oficina y de documentos con exposición media o alta
+    ("Planificar y organizar los procedimientos destinados a la contratación, formación, promoción, fijación de la escala salarial y las negociaciones sobre salarios, comunicación y consulta a los trabajadores, y demás cuestiones relacionadas con el personal de la empresa u organización.", "planes"),
+    ("Planificar y organizar los procedimientos destinados a la contratación, formación, promoción, fijación de la escala salarial.", "personal"),
+    ("Formular el programa de trabajo y el material didáctico a utilizar.", "material"),
+    ("Calcular el gasto de materiales y otros insumos.", "analisis"),
+    ("Elaborar cuadros y gráficos estadísticos sobre los temas de investigación.", "analisis"),
+    ("Llevar el control del inventario de mercancías.", "inventario"),
+    ("Solicitar materiales y suministros.", "inventario"),
+    ("Mantener contacto con los clientes para asegurar su satisfacción respecto de los productos adquiridos.", "seguimiento"),
+    ("Cobrar periódicamente el alquiler mensual del inmueble (casa, oficina, edificio, etcétera).", "seguimiento"),
+    ("Preparar contratos de alquiler.", "correspondencia"),
+    ("Calcular cargos con base en la tasa de renta.", "analisis"),
+    ("Ayudar a los clientes a determinar el tipo y nivel de cobertura que necesitan, calcular las primas y establecer el método de pago.", "cotizaciones"),
+    ("Revisar y corregir la ortografía y el estilo de la obra literaria.", "textos"),
+    ("Planear menús con base en las directrices establecidas.", "planes"),
+    ("Planificar, diseñar, escribir, modificar, integrar y probar los códigos del sitio web.", "codigo"),
+    ("Concertar citas o entrevistas para visitantes, clientes o pacientes.", "agenda"),
+    ("Obtener información sobre las propiedades en venta y acerca de las necesidades de los eventuales compradores.", "informacion"),
+    ("Verificar y controlar los cortes de caja, depósitos, inversiones y adeudos de la institución o empresa.", "datos"),
 ])
 def test_capacidad_detectada(texto, esperado):
     assert esperado in ids(texto)
@@ -62,6 +81,16 @@ def test_capacidad_detectada(texto, esperado):
     "Imprimir en prensas de pequeñas proporciones tarjetas, recibos de honorarios.",
     "Contestar teléfonos, pasar llamadas o tomar recados.",
     "Realizar otras funciones afines.",
+    # trabajo físico, presencial, en tiempo real, del poder público o en sistemas de terceros: fuera del alcance
+    "Programar, coordinar y supervisar las actividades de los trabajadores en la elaboración, por métodos tradicionales, de alimentos, bebidas y tabaco.",
+    "Impartir conocimientos, desarrollar habilidades y formar hábitos y actitudes conforme a los programas y planes establecidos por la Secretaría de Educación Pública.",
+    "Planear, diseñar e instrumentar la política económica, fiscal, de ingresos y egresos de la federación, de los estados, municipios e instituciones públicas.",
+    "Registrar información sobre la posición, el rumbo, la velocidad y el tiempo estimado de llegada de los barcos.",
+    "Atender consultas de información telefónica y registrar las llamadas.",
+    "Hacer reservaciones en las líneas aéreas o en otros medios de transporte y en hoteles.",
+    "Realizar investigaciones, diseñar y desarrollar procedimientos relativos a la fabricación de diversos productos químicos.",
+    "Cobrar al cliente por el consumo.",
+    "Leer manuales técnicos, consultar a los usuarios y realizar diagnósticos de computadoras, para determinar el origen de las fallas.",
 ])
 def test_sin_capacidad(texto):
     assert ids(texto) == []
@@ -98,6 +127,20 @@ def _fuentes_sinteticas():
                          "match_status": ["ok", "sin_coincidencia", "baja_confianza"], "exp_idx_media_modelos": [0.5, None, None]})
     ejemplos = pd.DataFrame({"sinco_code": ["1000"], "orden": [1], "ocupacion": ["Ejemplo."]})
     return {"main": main, "funciones": funciones, "ejemplos": ejemplos, "corridas": corridas}
+
+
+def test_exposicion_baja_no_se_marca():
+    """Una función cuyo texto coincide con una regla pero tiene exposición baja (< 1/3) no queda como 'puede ayudar'."""
+    fuentes = _fuentes_sinteticas()
+    fuentes["corridas"] = {k: pd.DataFrame({"sinco_code": ["1000", "1000", "2000"], "orden": [1, 2, 1],
+                                            "exposure_class": [c1, "E0", "E0"],
+                                            "function_text_es": ["Elaborar informes.", "Sacar fotocopias.", "Acordar citas."]})
+                           for k, c1 in {"a": "E0", "b": "E0", "c": "E2"}.items()}      # informes: (0 + 0 + 1) / 3 = 0.333; citas: 0
+    datos, rep = ex.construir(fuentes, REGLAS, {})
+    occ = {o["c"]: o for o in datos["occ"]}
+    assert occ["1000"]["f"][0][2] == 0.333 and occ["1000"]["f"][0][3] == []     # coincide con "informes", pero es exposición baja
+    assert occ["2000"]["f"][0][3] == []
+    assert rep["funciones_con_regla_pero_exposicion_baja"] == 2 and rep["funciones_con_capacidad"] == 0
 
 
 def test_union_reporta_problemas():
@@ -139,6 +182,18 @@ def test_uniones_reales_completas(reales):
     assert all(c["llaves_duplicadas"] == 0 and c["clases_desconocidas"] == 0 for c in rep["corridas"].values())
     assert len(rep["ocupaciones_sin_funciones"]) == 33
     assert rep["max_dif_exposicion_ocupacion"] < 1e-12             # el promedio de funciones reproduce exp_idx_media_modelos
+
+
+def test_solo_exposicion_media_o_alta_y_cobertura_real(reales):
+    _, datos, rep = reales
+    marcadas = [(o, f) for o in datos["occ"] for f in o["f"] if f[3]]
+    assert all(f[2] is not None and f[2] >= 1 / 3 for _, f in marcadas)             # nunca exposición baja
+    assert rep["funciones_con_capacidad"] == len(marcadas) >= 400                    # antes de la ampliación: 128
+    assert rep["ocupaciones_con_alguna_capacidad"] >= 150                            # antes: 82 de 490
+    # director de recursos humanos (1211): planificar los procedimientos de contratación, formación y salarios
+    rrhh = next(o for o in datos["occ"] if o["c"] == "1211")
+    f = next(f for f in rrhh["f"] if f[1].startswith("Planificar y organizar los procedimientos destinados a la contratación"))
+    assert f[2] == 0.5 and {datos["caps"][i]["id"] for i, _ in f[3]} >= {"planes", "personal"}
 
 
 def test_valores_reales_sin_recalcular(reales):

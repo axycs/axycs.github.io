@@ -9,6 +9,8 @@ Fuentes (repositorio sinco-ia, data/processed):
     main_sinco_comp_table calcula exp_idx; el promedio simple de las funciones reproduce exp_idx_media_modelos).
   - sinco_ocupaciones_ejemplo.parquet: ocupaciones de ejemplo, solo como palabras de búsqueda.
 Capacidades de Mi Primer Agente: tools/capacidades.json (reglas; ver clasificar.py). Sinónimos de búsqueda: tools/sinonimos.json.
+Solo se marca "Mi Primer Agente puede ayudar" en funciones de exposición media o alta (EXPO_MIN); una función de exposición
+baja no se marca aunque su texto coincida con una regla.
 
 Uso: python tools/export_funciones.py <ruta_repo_sinco_ia>
 Escribe también tools/reporte_funciones.json con la validación de las uniones (no descarta registros en silencio).
@@ -34,6 +36,7 @@ CORRIDAS = {  # las 6 corridas base de ann-s-v1 (las mismas de main_sinco_comp_t
     "opus_02": "ann-s-v1-2026-10-22-opus-02",
 }
 VAL_EXP = {"E0": 0.0, "E1": 0.5, "E2": 1.0}
+EXPO_MIN = 1 / 3  # exposición media o alta; mismo corte que Buscador.nivel (baja < 1/3)
 LLAVE = ["sinco_code", "orden"]
 
 
@@ -97,13 +100,17 @@ def construir(fuentes, reglas, sinonimos):
     def num(x, n=3):
         return None if pd.isna(x) else round(float(x), n)
 
-    occ, n_sop, n_excl = [], 0, 0
+    occ, n_sop, n_excl, n_baja = [], 0, 0, 0
     for r in main.sort_values("sinco_code").itertuples():
         filas = []
         for f in por_grupo.get(r.sinco_code, pd.DataFrame(columns=fun.columns)).itertuples():
+            score = num(f.score)
             hits, motivo = clasificar.clasificar(f.funcion, reglas)
+            if score is None or score < EXPO_MIN:  # exposición baja o sin dato: no se marca
+                n_baja += bool(hits)
+                hits, motivo = [], None
             n_sop += bool(hits); n_excl += bool(motivo)
-            filas.append([int(f.orden), f.funcion.strip(), num(f.score), [[cap_idx[i], t] for i, t in hits], motivo])
+            filas.append([int(f.orden), f.funcion.strip(), score, [[cap_idx[i], t] for i, t in hits], motivo])
         occ.append({
             "c": r.sinco_code, "t": r.titulo.strip(), "p": num(r.prob_automatizacion_fo),
             "pm": None if pd.isna(r.prob_fo_motivo_na) else r.prob_fo_motivo_na,
@@ -113,6 +120,7 @@ def construir(fuentes, reglas, sinonimos):
             "f": filas,
         })
     rep["funciones_con_capacidad"] = n_sop
+    rep["funciones_con_regla_pero_exposicion_baja"] = n_baja
     rep["funciones_bloqueadas_por_exclusion_global"] = n_excl
     rep["ocupaciones_con_alguna_capacidad"] = sum(any(f[3] for f in o["f"]) for o in occ)
     datos = {

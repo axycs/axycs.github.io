@@ -1,10 +1,11 @@
 {
-  "_que_es": "Mapeo mantenible entre las capacidades de Mi Primer Agente y las funciones del SINCO 2019. Una función queda marcada si su texto coincide con algún patrón de una capacidad y con ninguna exclusión (de la capacidad o global). Los patrones son expresiones regulares de Python sobre el texto en minúsculas y sin acentos. Clasificación orientativa: el alcance real de cada cliente se confirma en el diagnóstico.",
+  "_que_es": "Mapeo mantenible entre las capacidades de Mi Primer Agente y las funciones del SINCO 2019. Una función queda marcada si su texto coincide con algún patrón de una capacidad y con ninguna exclusión (de la capacidad o global), y si su exposición a la IA es media o alta (export_funciones.py descarta las de exposición baja). Los patrones son expresiones regulares de Python sobre el texto en minúsculas y sin acentos. Clasificación orientativa: el alcance real de cada cliente se confirma en el diagnóstico.",
   "_fuentes": [
     "ESTRUCTURA_EMPRESA.md, sección Mi Primer Agente: problema (cotizaciones, seguimiento de clientes, reportes, correspondencia, organización de archivos), perfiles (planes, recordatorios, material para pacientes; correspondencia y solicitud de documentos), No incluye y Restricciones operativas",
-    "web/index.html, sección Soluciones con IA: Cotizaciones, Seguimiento de clientes, Correos y cartas, Reportes, Organización de archivos, Lectura de facturas"
+    "web/index.html, sección Soluciones con IA: Cotizaciones, Seguimiento de clientes, Correos y cartas, Reportes, Organización de archivos, Lectura de facturas",
+    "Criterio 2026-11-03: el agente es Claude Code sobre carpetas autorizadas, así que apoya el trabajo de oficina y de documentos (planear y redactar procedimientos, calcular y tabular, ordenar registros, revisar textos, programar). No hace trabajo físico ni presencial, llamadas, operaciones en sistemas de terceros, pagos, ni decisiones clínicas, legales o fiscales; esas siguen en exclusiones_globales y en las exclusiones de cada capacidad."
   ],
-  "_version": "2026-10-30",
+  "_version": "2026-11-03",
   "capacidades": [
     {
       "id": "informes",
@@ -13,25 +14,37 @@
       "patrones": [
         "\\binformes?\\b",
         "\\breportes?\\b",
-        "\\bresumen(es)?\\b"
+        "\\bresumen(es)?\\b",
+        "\\binformar\\b[^.]{0,40}\\bpor escrito\\b",
+        "\\b(analizar|examinar)\\b[^.]{0,30}\\b(actividades|operaciones|resultados)\\b[^.]{0,40}\\b(empresa|organizacion|institucion|obtenidos)\\b",
+        "\\bcomunicar esta informacion\\b"
       ],
-      "exclusiones": []
+      "exclusiones": [
+        "\\b(militar(es)?|ejercito|armada|fuerza aerea|policia|policiacos|fuerza publica|aeronaves?|vuelos?|controladores|buques?|barcos?|embarcaciones|tripulacion|ministerio publico|juzgado|tribunal(es)?|sentencias?|delitos?|inspeccionar|federacion|entidades federativas|gobierno federal|presidente de la republica)\\b",
+        "\\b(enfermedades|dolencias)\\b"
+      ]
     },
     {
       "id": "correspondencia",
       "nombre": "Correos, cartas y documentos",
-      "que_hace": "Redacta correos, oficios y documentos para que tú los revises y envíes.",
+      "que_hace": "Redacta correos, mensajes, oficios y borradores de documentos para que tú los revises y envíes.",
       "patrones": [
         "\\bcorrespondencia\\b",
         "\\bredact(ar|a|an)\\b",
         "\\bcorreos? electronicos?\\b",
         "\\bmemorandums?\\b",
         "\\bcomunicados?\\b",
-        "\\b(elaborar|redactar|contestar) (los |las )?(oficios|cartas)\\b"
+        "\\b(elaborar|redactar|contestar) (los |las )?(oficios|cartas)\\b",
+        "\\binformar\\b[^.]{0,30}\\b(a|al) (los |las )?(clientes?|padres|alumnos|operadores|superiores|supervisor|directivos|direccion|jefes|fabricantes|proveedores|usuarios|empleados|trabajadores|personal)\\b",
+        "\\b(telefonear o )?escribir a (los )?clientes\\b",
+        "\\b(preparar|elaborar|redactar) (los |las |un |una )?(contratos?|formatos?) de (alquiler|renta|arrendamiento|servicios?|publicidad|venta|compraventa|trabajo de publicidad)\\b",
+        "\\bpreparar formatos de renta\\b"
       ],
       "exclusiones": [
         "\\b(repartir|reparte|entregar|entrega|colocarla|pichonera)\\b",
-        "\\b(novelas?|poesia|guiones|obras de teatro)\\b"
+        "\\b(novelas?|poesia|guiones|obras de teatro)\\b",
+        "\\b(militar(es)?|ejercito|armada|fuerza aerea|policia|policiacos|fuerza publica|aeronaves?|vuelos?|controladores|buques?|barcos?|embarcaciones|tripulacion|ministerio publico|juzgado|tribunal(es)?|sentencias?|delitos?|inspeccionar|federacion|entidades federativas|gobierno federal|presidente de la republica)\\b",
+        "\\b(radio|telex|telegraf\\w*|trafico|emergencia|accidentes?|bursatil\\w*|mercados financieros)\\b"
       ]
     },
     {
@@ -41,45 +54,67 @@
       "patrones": [
         "\\barchiv(ar|a|an)\\b",
         "\\b(el|los|del|su|sus) archivos?\\b",
+        "\\b(de|y) archivos\\b",
+        "\\barchivad[oa]s?\\b",
         "\\bexpedientes?\\b",
         "\\bclasificar\\b.*\\bdocumentos\\b",
         "\\bcontrol de (los )?documentos\\b",
-        "\\b(tramitar|integrar|ordenar|organizar|clasificar|preparar|elaborar|revisar) [^.]{0,30}\\bdocumentacion\\b"
+        "\\b(tramitar|integrar|ordenar|organizar|clasificar|preparar|elaborar|revisar) [^.]{0,30}\\bdocumentacion\\b",
+        "\\bdirectorios?\\b[^.]{0,30}\\bdocumentos\\b",
+        "\\bresguardar\\b"
       ],
       "exclusiones": [
         "\\bpacientes?\\b",
         "\\btratamientos?\\b",
-        "\\bsintomas\\b"
+        "\\bsintomas\\b",
+        "\\b(clinic\\w*|laboratorio)\\b"
       ]
     },
     {
       "id": "agenda",
-      "nombre": "Agenda y recordatorios",
-      "que_hace": "Organiza citas y compromisos y prepara recordatorios.",
+      "nombre": "Agenda, itinerarios y eventos",
+      "que_hace": "Organiza citas, horarios, itinerarios y eventos, y prepara recordatorios.",
       "patrones": [
         "\\b(en|la|su|de|una) agenda\\b",
         "\\bcitas\\b",
         "\\brecordar(le|les)?\\b",
         "\\brecordatorios?\\b",
         "\\borganizacion de (las )?reuniones\\b",
-        "\\bprogramar (las )?(reuniones|citas|entrevistas|visitas)\\b"
+        "\\bprogramar (las )?(reuniones|citas|entrevistas|visitas)\\b",
+        "\\b(hacer|elaborar|formul\\w+|preparar|planear|planificar|organizar)\\b[^.]{0,20}\\bitinerarios\\b",
+        "\\bsobre itinerarios\\b",
+        "\\b(planear|planificar|organizar|coordinar)\\b[^.]{0,30}\\b(eventos|reuniones|viajes|congresos|ferias|exposiciones|tours)\\b",
+        "\\borganizan tours\\b",
+        "\\b(planear|planificar) y programar (las )?actividades\\b"
       ],
       "exclusiones": [
         "\\bforos?\\b",
-        "\\bdebates?\\b"
+        "\\bdebates?\\b",
+        "\\b(militar(es)?|ejercito|armada|fuerza aerea|policia|policiacos|fuerza publica|aeronaves?|vuelos?|controladores|buques?|barcos?|embarcaciones|tripulacion|ministerio publico|juzgado|tribunal(es)?|sentencias?|delitos?|inspeccionar|federacion|entidades federativas|gobierno federal|presidente de la republica)\\b",
+        "\\b(bomberos|incendios|pasaje|abordaje|abordar)\\b"
       ]
     },
     {
       "id": "cotizaciones",
       "nombre": "Cotizaciones",
-      "que_hace": "Prepara cotizaciones y presupuestos con tus precios y plantillas.",
+      "que_hace": "Prepara cotizaciones, presupuestos y listas de precios con tus datos y plantillas.",
       "patrones": [
         "\\bcotiza",
         "\\b(elaborar|preparar|formular|calcular) (los |el |un |la )?(presupuestos?|cotizacion(es)?)\\b",
-        "\\bpropuestas? (comercial|comerciales|economica|economicas|de servicio)"
+        "\\bpropuestas? (comercial|comerciales|economica|economicas|de servicio)",
+        "\\bcalcular\\b[^.]{0,20}\\bprimas\\b",
+        "\\blistas? de precios\\b",
+        "\\bindicar los precios\\b",
+        "\\bcondiciones de (venta|credito|alquiler|renta)\\b",
+        "\\btarifas de renta\\b",
+        "\\binformacion (detallada )?(sobre|del|de) (los |el )?(productos?|articulos|servicios)\\b",
+        "\\bestimaciones\\b[^.]{0,60}\\bcostos?\\b",
+        "\\bcosto estimado\\b",
+        "\\bpresupuestar\\b"
       ],
       "exclusiones": [
-        "\\bbolsa\\b"
+        "\\bbolsa\\b",
+        "\\binversionistas?\\b"
       ]
     },
     {
@@ -90,7 +125,8 @@
         "\\bfactur",
         "\\brecibos\\b",
         "\\bnotas de venta\\b",
-        "\\bfichas de venta\\b"
+        "\\bfichas de venta\\b",
+        "\\bcomprobantes\\b"
       ],
       "exclusiones": [
         "\\bcontabilidad\\b",
@@ -101,43 +137,209 @@
     {
       "id": "seguimiento",
       "nombre": "Seguimiento de clientes y solicitudes",
-      "que_hace": "Ordena solicitudes y prepara mensajes de seguimiento para tus clientes.",
+      "que_hace": "Ordena solicitudes y prepara mensajes de seguimiento y cobranza para tus clientes.",
       "patrones": [
-        "\\bseguimiento (a|de|al) (los |las )?(clientes|solicitudes|pedidos|tramites|cobros|pagos|asuntos|casos|contratos)\\b",
+        "\\bseguimiento (a|de|al) (los |las )?(clientes|solicitudes|pedidos|tramites|cobros|pagos|asuntos|casos|contratos|acuerdos)\\b",
         "\\bsolicitudes\\b",
         "\\brenovacion(es)?\\b",
         "\\bcobranza\\b",
-        "\\bquejas\\b"
+        "\\bquejas\\b",
+        "\\bmantener (el )?contacto con (los )?clientes\\b",
+        "\\bcarteras? de clientes\\b",
+        "\\bcuentas vencidas\\b",
+        "\\bdinero adeudado\\b",
+        "\\bcobrar periodicamente\\b",
+        "\\btramites administrativos\\b"
       ],
       "exclusiones": [
         "\\bpacientes?\\b",
         "\\btratamientos?\\b",
         "\\bsalud\\b",
-        "\\bvisitar\\b"
+        "\\bvisitar\\b",
+        "\\b(telefon\\w*|via telefonica)\\b"
       ]
     },
     {
       "id": "material",
-      "nombre": "Material para clientes o pacientes",
-      "que_hace": "Prepara material informativo a partir de tus plantillas.",
+      "nombre": "Material informativo, de venta y didáctico",
+      "que_hace": "Prepara folletos, presentaciones, material didáctico y textos de promoción a partir de tus plantillas.",
       "patrones": [
-        "\\b(elaborar|desarrollar|preparar|formular|redactar|disenar)\\b[^.]{0,40}\\b(materiales? (educativos?|didacticos?|informativos?|de difusion|promocionales?)|folletos?|boletin(es)?|instructivos)\\b"
+        "\\b(elaborar|desarrollar|preparar|formular|redactar|disenar|seleccionar)\\b[^.]{0,40}\\b(material(es)? (educativos?|didacticos?|informativos?|de difusion|promocionales?)|folletos?|boletin(es)?|instructivos)\\b",
+        "\\b(elaborar|formular|preparar|disenar)\\b[^.]{0,30}\\b(examenes|pruebas|evaluaciones|cuestionarios|tareas)\\b",
+        "\\bpromover\\b[^.]{0,40}\\b(mercancias|productos|servicios)\\b[^.]{0,40}\\b(electronic\\w*|medios)\\b",
+        "\\bcampanas? (de )?(publicidad|publicitarias|promocion)\\b",
+        "\\bpresentaciones de ventas\\b",
+        "\\bdifundir\\b[^.]{0,40}\\b(politicas|informacion|condiciones)\\b"
       ],
-      "exclusiones": []
+      "exclusiones": [
+        "\\b(inteligencia|aptitud vocacional|solicitantes)\\b",
+        "\\b(pruebas de (los )?(programas|software)|programas elaborados)\\b"
+      ]
     },
     {
       "id": "datos",
       "nombre": "Registro y orden de datos",
-      "que_hace": "Captura y ordena datos en hojas de cálculo.",
+      "que_hace": "Captura, ordena y valida datos y registros en hojas de cálculo.",
       "patrones": [
         "\\bcaptur(ar|a|an) (los |las )?(datos|informacion|registros)\\b",
         "\\bcaptura de (datos|informacion)\\b",
         "\\binformacion capturada\\b",
         "\\bhojas? de calculo\\b",
-        "\\bregistr(ar|a|an) (los |las )?(datos|movimientos|operaciones)\\b"
+        "\\bregistr(ar|a|an) (los |las )?(datos|movimientos|operaciones)\\b",
+        "\\bllev(ar|a|an) (un |el |los |las )?(registros?|bitacora|libro)\\b",
+        "\\bllev(ar|a|an) (el |un )?control (del|de los|de las) (kilometraje|gastos|pagos|ventas|compras|ingresos|facturas)\\b",
+        "\\bregistrar\\b[^.]{0,50}\\b(ingresos|egresos|transacciones|pagos|gastos|llamadas|mensajes|informacion|resultados|datos|cargos|trabajo|insumos)\\b",
+        "\\bbitacora\\b",
+        "\\btranscribir (y clasificar )?datos\\b",
+        "\\bcodificacion\\b",
+        "\\basignar claves\\b",
+        "\\bvalidar la congruencia\\b",
+        "\\bcorregir los datos\\b",
+        "\\bcortes? de caja\\b",
+        "\\bapoyo administrativo\\b",
+        "\\bbalance de caja\\b",
+        "\\bllenar\\b[^.]{0,30}\\b(formatos|formularios|cuestionarios)\\b"
       ],
       "exclusiones": [
-        "\\bcontabilidad\\b"
+        "\\bcontabilidad\\b",
+        "\\bpacientes?\\b",
+        "\\banestesia\\b",
+        "\\b(manometros|termometros|lecturas?|tableros?|libreta de transito)\\b",
+        "\\b(titulos|acciones|valores|divisas)\\b",
+        "\\b(telefonic\\w*|cobrar|monitorear|cardiac\\w*|pozos|sismicos)\\b",
+        "\\b(militar(es)?|ejercito|armada|fuerza aerea|policia|policiacos|fuerza publica|aeronaves?|vuelos?|controladores|buques?|barcos?|embarcaciones|tripulacion|ministerio publico|juzgado|tribunal(es)?|sentencias?|delitos?|inspeccionar|federacion|entidades federativas|gobierno federal|presidente de la republica|pacientes?|quirurgic\\w+|anestesia|diagnostic\\w*)\\b"
+      ]
+    },
+    {
+      "id": "analisis",
+      "nombre": "Cálculos, cuadros y gráficos",
+      "que_hace": "Hace cálculos y análisis con tus hojas de cálculo y arma cuadros y gráficos para que los revises.",
+      "patrones": [
+        "\\bcalculos?\\b",
+        "\\bcalcular\\b[^.]{0,60}\\b(dimensiones|superficies|cantidades|cantidad|caracteristicas|tallas)\\b",
+        "\\bdeterminar\\b[^.]{0,20}\\btasas\\b",
+        "\\bcalcular\\b[^.]{0,40}\\b(costos?|costes|gastos?|ingresos|nomina|cargos|saldos|intereses|valores nutricionales|monto)\\b",
+        "\\b(vigilar|controlar|administrar) (y vigilar )?(los )?(gastos|ingresos y egresos)\\b",
+        "\\bingresos y egresos\\b",
+        "\\b(analizar|examinar|evaluar|estudiar)\\b[^.]{0,40}\\b(costos|gastos|situacion financiera|estados de cuenta|estados financieros|tendencias|registros contables)\\b",
+        "\\b(elaborar|preparar|formular|trazar)\\b[^.]{0,100}\\b(cuadros|tablas|graficas|graficos estadisticos|graficos y)\\b",
+        "\\b(analizar|interpretar|aplicar|calcular|elaborar|preparar|compilar|realizar|desarrollar|determinar|revisar|examinar|estudiar)\\b[^.]{0,60}\\bestadistic\\w*",
+        "\\bpronosticar\\b",
+        "\\bpronosticos? financieros\\b",
+        "\\bsituacion financiera\\b",
+        "\\banalisis de costos\\b",
+        "\\bestudios? de presupuesto\\b",
+        "\\b(elaborar|preparar|formular|administrar|controlar|coordinar la preparacion de)\\b[^.]{0,40}\\bpresupuestos?\\b",
+        "\\b(recopilar|compilar) y analizar datos\\b"
+      ],
+      "exclusiones": [
+        "\\b(telecomunicaciones|circuitos?|cableado|laboratorio|pozos|yacimientos|atmosfera|clima|meteorolog\\w*|medir)\\b",
+        "\\b(militar(es)?|ejercito|armada|fuerza aerea|policia|policiacos|fuerza publica|aeronaves?|vuelos?|controladores|buques?|barcos?|embarcaciones|tripulacion|ministerio publico|juzgado|tribunal(es)?|sentencias?|delitos?|inspeccionar|federacion|entidades federativas|gobierno federal|presidente de la republica|pacientes?|quirurgic\\w+|anestesia|diagnostic\\w*)\\b"
+      ]
+    },
+    {
+      "id": "inventario",
+      "nombre": "Inventarios, pedidos y compras",
+      "que_hace": "Lleva el inventario en una hoja de cálculo y prepara pedidos y solicitudes de compra para que los apruebes.",
+      "patrones": [
+        "\\binventarios?\\b",
+        "\\bsolicitar\\b[^.]{0,30}\\b(materiales|suministros|insumos|mercancias)\\b",
+        "\\b(registrar|anotar|elaborar|organizar)\\b[^.]{0,30}\\b(ordenes de pedido|pedidos|ordenes de compra)\\b",
+        "\\bprogramar compras\\b",
+        "\\bcontrol de (la )?(despensa|existencias|almacen)\\b",
+        "\\bentrada y salida de mercancias\\b",
+        "\\bcuenta de la mercancia\\b"
+      ],
+      "exclusiones": [
+        "\\b(titulos|acciones|valores|divisas|bolsa|comandas)\\b"
+      ]
+    },
+    {
+      "id": "personal",
+      "nombre": "Administración de personal",
+      "que_hace": "Controla vacaciones, licencias, asistencia y nómina en hojas de cálculo y prepara borradores de documentos de personal.",
+      "patrones": [
+        "\\bnominas?\\b",
+        "\\b(tramitacion|tramites|control) de (las )?(vacaciones|licencias)\\b",
+        "\\bcontrol administrativo del personal\\b",
+        "\\b(monto del )?pago a(l| los) (trabajadores|personal)\\b",
+        "\\bdescripciones? de puestos?\\b",
+        "\\brangos salariales\\b",
+        "\\bescala salarial\\b",
+        "\\bdotacion de personal\\b",
+        "\\bremuneraciones\\b"
+      ],
+      "exclusiones": [
+        "\\bdeclaracion(es)?\\b"
+      ]
+    },
+    {
+      "id": "textos",
+      "nombre": "Revisión y traducción de textos",
+      "que_hace": "Corrige ortografía y estilo, y revisa o traduce textos para que tú los apruebes.",
+      "patrones": [
+        "\\b(corregir|revisar|editar|afinar)\\b[^.]{0,40}\\b(ortografia|sintaxis|lexico|estilo|textos|traducciones|redaccion)\\b",
+        "\\btraducc?(ion|iones)\\b",
+        "\\btraducir\\b"
+      ],
+      "exclusiones": [
+        "\\b(peliculas|video|cintas)\\b"
+      ]
+    },
+    {
+      "id": "informacion",
+      "nombre": "Búsqueda y resumen de información",
+      "que_hace": "Reúne y resume información de los documentos y fuentes que autorizas.",
+      "patrones": [
+        "\\b(compilar|recopilar|recabar|reunir|consultar|investigar)\\b[^.]{0,40}\\b(informacion|datos|documentos|bibliografia|fuentes|estadisticas|estudios)\\b",
+        "\\bobtener informacion( necesaria| detallada)? sobre\\b",
+        "\\bbibliografia\\b",
+        "\\binformacion documental\\b",
+        "\\blocalizar (datos|informacion)\\b",
+        "\\bfuentes de informacion\\b",
+        "\\bleer (los |las )?(manuales|folletos|ordenes de trabajo|documentos)\\b",
+        "\\brevisar\\b[^.]{0,30}\\b(planes|especificaciones|pedidos|documentos)\\b",
+        "\\binvestigar\\b[^.]{0,30}\\b(ventas|mercados potenciales)\\b",
+        "\\b(elaborar|realizar|desarrollar)\\b[^.]{0,20}\\b(estudios|investigaciones)\\b[^.]{0,30}\\b(historic\\w*|politic\\w*|econom\\w*|sociales|demograf\\w*|mercado|presupuesto|servicios|ventas|socioeconomic\\w*|prospeccion|educativ\\w*)"
+      ],
+      "exclusiones": [
+        "\\b(clinic\\w*|medic\\w*|sangre|laboratorio|entrevist\\w+|preguntas|bolsa|bursatil\\w*)\\b",
+        "\\b(militar(es)?|ejercito|armada|fuerza aerea|policia|policiacos|fuerza publica|aeronaves?|vuelos?|controladores|buques?|barcos?|embarcaciones|tripulacion|ministerio publico|juzgado|tribunal(es)?|sentencias?|delitos?|inspeccionar|federacion|entidades federativas|gobierno federal|presidente de la republica|pacientes?|quirurgic\\w+|anestesia|diagnostic\\w*)\\b"
+      ]
+    },
+    {
+      "id": "planes",
+      "nombre": "Planes, políticas y procedimientos",
+      "que_hace": "Redacta borradores de planes, políticas, procedimientos y programas de trabajo para que los ajustes y apruebes.",
+      "patrones": [
+        "\\b(planificar|planear|organizar|definir|establecer|elaborar|formular|desarrollar|disenar|preparar|proponer|actualizar|fijar|instaurar|implementar|documentar)\\b[^.]{0,50}\\b(procedimientos?|politicas?|planes?|estrategias?|manuales|reglamentos|estatutos|organigramas?|estructura organizacional|estructuras administrativas|planeacion estrategica|cursos|rutas|sistemas de trabajo|metodos y procedimientos)\\b",
+        "\\b(planificar|planear|definir|establecer|elaborar|formular|disenar|preparar|proponer|fijar|instaurar|gestionar)\\b[^.]{0,50}\\bprogramas?\\b",
+        "\\b(desarrollar|organizar|implementar|actualizar|documentar)\\b[^.]{0,40}\\bprogramas? de (capacitacion|adiestramiento|incentivos|trabajo|evaluacion|mejoramiento|accion|estudio|nutricion|comercializacion)\\b",
+        "\\b(planear|planificar|elaborar|crear|confeccionar|disenar)\\b[^.]{0,30}\\b(menus?|dietas)\\b",
+        "\\bplanear\\b[^.]{0,20}\\b(tiempos|costos)\\b",
+        "\\bdefinir\\b[^.]{0,30}\\b(unidades operativas|lineas de autoridad|responsabilidades)\\b"
+      ],
+      "exclusiones": [
+        "\\b(militar(es)?|ejercito|armada|fuerza aerea|policia|policiacos|fuerza publica|aeronaves?|vuelos?|controladores|buques?|barcos?|embarcaciones|tripulacion|ministerio publico|juzgado|tribunal(es)?|sentencias?|delitos?|inspeccionar|federacion|entidades federativas|gobierno federal|presidente de la republica|pacientes?|quirurgic\\w+|anestesia|diagnostic\\w*)\\b",
+        "\\b(enfermedades|tratamientos?|diagnosticos?|medicamentos|clinic\\w*)\\b",
+        "\\b(legislativ\\w*|congresos locales|partido|candidatos|capacitacion politica)\\b",
+        "\\b(quimic\\w*|petroquimic\\w*|metalurgic\\w*|gas|electricidad|petroleo|hidrocarburos|aguas residuales|extraccion|intervencion)\\b",
+        "\\b(impartir|conforme a los programas)\\b"
+      ]
+    },
+    {
+      "id": "codigo",
+      "nombre": "Programación y documentación técnica",
+      "que_hace": "Escribe, prueba y documenta código y scripts dentro de tu carpeta de trabajo.",
+      "patrones": [
+        "\\b(escribir|crear|disenar|disenan|modificar|integrar|probar|prueban|elaborar|desarrollar|desarrollan|planificar|corregir|mantener|mantienen|dar mantenimiento)\\b[^.]{0,60}\\b(codigos?|programas(?=\\.| o |,)|programas (informaticos|de computo|de computadora)|software|sitio web|paginas web|sistemas de software)\\b",
+        "\\bdocumentacion\\b[^.]{0,40}\\b(programas|sistemas|software)\\b",
+        "\\bpruebas de (los )?(programas|software)\\b",
+        "\\bdiagramas\\b[^.]{0,60}\\bprograma\\b",
+        "\\b(codificar|desarrollar|disenar|analizar)\\b[^.]{0,40}\\b(modelos de datos|bases de datos|algoritmos|estructuras de datos)\\b"
+      ],
+      "exclusiones": [
+        "\\b(hardware|redes|perifericos)\\b"
       ]
     }
   ],
@@ -147,7 +349,7 @@
       "motivo": "Decisión clínica: es del profesional"
     },
     {
-      "patron": "\\bhistorial(es)? (clinicos?|medicos?)\\b|\\bexpedientes? (clinicos?|medicos?)\\b|\\bhistoria clinica\\b|\\bsignos vitales\\b",
+      "patron": "\\bhistorial(es)? (clinicos?|medicos?)\\b|\\bexpedientes? (clinicos?|medicos?)\\b|\\bhistoria clinica\\b|\\bhistorias clinicas\\b|\\bsignos vitales\\b",
       "motivo": "Sin expedientes clínicos"
     },
     {
@@ -159,7 +361,7 @@
       "motivo": "Sin acceso a declaraciones fiscales"
     },
     {
-      "patron": "\\bdemandas? (judicial|judiciales|legales?|laborales?)\\b|\\brevisar (y/o )?demandas\\b|\\bdemandas, contratos\\b|\\btribunal(es)?\\b|\\bjuicios?\\b|\\bdiligencias? judicial|\\bjuridic",
+      "patron": "\\bdemandas? (judicial|judiciales|legales?|laborales?)\\b|\\brevisar (y/o )?demandas\\b|\\bdemandas, contratos\\b|\\btribunal(es)?\\b|\\bjuicios?\\b|\\bdiligencias? judicial|\\bjuridic|\\bjurisprudencia\\b|\\bleyes y reglamentos\\b|\\bprocedimientos (legales|judiciales)\\b",
       "motivo": "No incluye asesoría legal"
     },
     {
